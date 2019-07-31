@@ -14,10 +14,12 @@ The environment can also change due to actions the agent has made allowing for a
 * State space ($S$)
   * The set of all possible configurations of the world the agent is operating in
     * i.e. the internal state of the agent and the environment that matters for the interaction between the agent and the environment
-* Transition function / World dynamics ($T: S \times A \to S'$)
-  * A function that specifies how to configuration of the world changes when the agent performs actions in it
+* Transition function / World dynamics ($T: S \times A \to S$)
+  * A function that specifies how the configuration of the world changes when the agent performs acts in it
+  * This will not be well-defined (i.e. representable by a lookup table)  if the world is non-deterministic.
 * Perception function ($Z: S \to P$)
   * A function that maps a state to a perception
+  * Could be the identity mapping (i.e. "do nothing") if the world is fully-observable and each state is its own percept.
 * Utility function ($U:S \to \mathbb{R}$) 
   * A function that measures of how good a state is.
   * This is required for the agent to gauge whether a certain action is worth performing.
@@ -26,7 +28,7 @@ The environment can also change due to actions the agent has made allowing for a
 Our agent should find a mapping from sequences of percepts to actions that maximises the utility function (so that the world state is as good as it can be).
 i.e. find a mapping $M:P^n \to A$ which maximises $U$. 
 
-**Example 1**: Navigate a robot to a point $P$. The utility function should be defined to be how close in the world the robot is to $P$.
+**Example 1**: Navigate a robot to a point $P$. The utility function could be defined to be the negative of how close in the world the robot is to $P$. That way, the closer we are to $P$, the more positive $U$ is.
 
 **Example 2**: Sliding puzzle.
 
@@ -39,10 +41,11 @@ An agent to solve the sliding puzzle could be defined as $(A, P, S, T, Z, U)$ wh
 
 * $P$ (the percept space) the order of the tiles
 
-  * e.g. in the image on the left above, the order can be represented as the following sequence:
-    $$
-    \{1, 2, 3, 8, \_, 4, 7, 6, 5\}
-    $$
+  * e.g. in the image on the left above, the order can be represented as the following string:
+    
+    ```
+    1238_4765
+    ```
 
 * $S$ (the state space) is the same as the percept space (i.e. $S$ = $P$) which is the order of the tiles
 
@@ -54,7 +57,9 @@ An agent to solve the sliding puzzle could be defined as $(A, P, S, T, Z, U)$ wh
 
   * ~~Problems with this, since sometimes you have to mess up the order temporarily to get to a better state and this utility function would discourage that~~
 
-  Could be simply 1 for the goal state and 0 for any other state. Let the agent figure it out along the way?
+  Could be simply 1 for the goal state and 0 for any other state. Let the agent figure it out along the way over a number of different trials.
+  
+  * In practice, this isn't the approach we would normally go for but this conveys the message well.
   
   
 
@@ -89,6 +94,7 @@ Properties about the environment itself or the agent's knowledge about the envir
   * In examples 2 and 3, they were discrete.
 * **Deterministic** vs. **stochastic / non-deterministic**
   * Does the agent always know exactly which state it will be in after it performs an action from a state?
+  * Is the transition function ($T$) well-defined?
   * In example 2, yes. Example 3 has to factor in the opponent's turn which is non-deterministic.
 * **Fully observable** vs. **partially observable**
   * Does the agent know the state of the world exactly?
@@ -97,3 +103,4 @@ Properties about the environment itself or the agent's knowledge about the envir
 * **Static** vs. **dynamic** 
   * Can the world change while the agent is "thinking" (i.e. not acting)?
   * e.g. in a video game, often the world is changing while the player is not acting
+
