@@ -32,7 +32,7 @@ if __name__ == '__main__':
                     line_mod = line_mod.replace(i, 'https://raw.githubusercontent.com/tristanbatchler/COMP3702/master%s' % q)
             else:
                 q = urllib.parse.quote(line_mod)
-                md = '[%s](https://latex.codecogs.com/gif.latex?%s)' % (q, q)
+                md = '![%s](https://latex.codecogs.com/gif.latex?%s)' % (q, q)
                 line_mod = line_mod.replace(line_mod, md)
         else: 
             display = not display
