@@ -254,7 +254,7 @@ Using the Navigation App example above:
   * We don't consider cost in BFS since it's uninformed
 * Complexity
   * Time
-    * $1 + b + b^2 + ... + b^d = \frac{b^{d+1} - 1}{b - 1}$
+    * $1 + b + b^2 + ... + b^d = (b^{d+1} - 1)/(b - 1)$
     * so $O(b^d)$ for # steps
   * Space
     * Explored nodes: $O(b^{d-1})$ + unexplored nodes: $O(b^d)$
@@ -269,7 +269,7 @@ Using the Navigation App example above:
 
 ![Bidirectional BFS](.\Images\Lecture 2\bidirectional-bfs.png)
 
-* Time and space complexity is $O(b^{d/2}) << O(b^d)$
+* Time and space complexity is $O(b^{d/2}) \lt \lt O(b^d)$
 
 
 
@@ -319,7 +319,7 @@ Using the navigation app example from before:
   - We don't consider cost in BFS since it's uninformed
 - Complexity
   - Time
-    - $1 + b + b^2 + ... + b^m = \frac{b^{m+1} - 1}{b - 1}$
+    - $1 + b + b^2 + ... + b^m = (b^{m+1} - 1)/(b - 1)$
     - so $O(b^m)$ for # steps
   - Space
     - Can be implemented using $O(bm)$ or $O(m)$ using backtracking DFS but be careful of revisiting vertices (states)!
@@ -386,15 +386,15 @@ Using the navigation app again:
       $$
       which converges to (see [geometric power series](https://en.wikipedia.org/wiki/Geometric_series#Geometric_power_series))
       $$
-      {\displaystyle b^{d}(1-x)^{-2}=b^{d}{\frac {1}{(1-x)^{2}}}, \quad |x|<1}
+      {\displaystyle b^{d}(1-x)^{-2}=b^{d}{{1}/{(1-x)^{2}}}, \quad |x| \lt 1}
       $$
       That is, we have
       $$
       b^{d}+2b^{d-1}+3b^{d-2}+\cdots +(d-1)b^{2}+db+(d+1)\leq b^{d}(1-x)^{-2}
       $$
-      whenever $|x| < 1$.
+      whenever $|x| \lt 1$.
 
-      Since $(1-x)^{-2}$ or $\left(1 - \frac{1}{b}\right)^{-2}$ is constant independent of $d$ (the depth), if $b > 1$ (i.e., if the branching factor is greater than 1), the running time of the depth-first iterative deepening search is $O(b^d)$ :call_me_hand:
+      Since $(1-x)^{-2}$ or $(1 - {1}/{b})^{-2}$ is constant independent of $d$ (the depth), if $b > 1$ (i.e., if the branching factor is greater than 1), the running time of the depth-first iterative deepening search is $O(b^d)$ :call_me_hand:
 
   - Space
 
@@ -443,7 +443,7 @@ See this video as a comparison of DFS vs. IDDFS to see how much faster the latte
 - Optimal (in terms of # steps)
   - Yes, if all edges have a positive cost
 - Complexity
-  - Time **and** space: $O\left(b^{1 + \mathrm{floor}\left( c^* / \epsilon \right)} \right)$
+  - Time **and** space: $O(b^{1 + \mathrm{floor}( c^* / \epsilon )} )$
 
 ## Summary
 
@@ -460,5 +460,5 @@ See this video as a comparison of DFS vs. IDDFS to see how much faster the latte
 | BFS          | Yes if $b$ finite                               | Yes                                | $O(b^d)$                                                     | $O(b^d)$                                                     |
 | DFS          | Yes if $m, b$ finite & no revisiting            | No                                 | $O(b^m)$                                                     | $O(bm)$ or $O(m)$ w/ backtracking                            |
 | IDDFS        | Yes if $b$ finite                               | Yes                                | $O(b^d)$                                                     | $O(bd)$                                                      |
-| Uniform Cost | Yes if $b$ finite & all edges have cost $\gt 0$ | Yes if all edges have cost $\gt 0$ | $O\left(b^{1 + \mathrm{floor}\left( c^* / \epsilon \right)} \right)$ | $O\left(b^{1 + \mathrm{floor}\left( c^* / \epsilon \right)} \right)$ |
+| Uniform Cost | Yes if $b$ finite & all edges have cost $\gt 0$ | Yes if all edges have cost $\gt 0$ | $O(b^{1 + \mathrm{floor}( c^* / \epsilon )} )$ | $O(b^{1 + \mathrm{floor}( c^* / \epsilon )} )$ |
 
