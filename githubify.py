@@ -34,6 +34,6 @@ if __name__ == '__main__':
         lines_mod.append(line_mod)
         print(line_mod)
 
-    with open(args.file_in + '.mod.md', 'w') as f:
+    with open(args.file_in, 'w') as f:
         for item in lines_mod:
             f.write("%s" % item)
