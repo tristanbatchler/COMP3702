@@ -11,20 +11,20 @@
 
 Therefore, in the first part of this class, designing an agent only needs to set:
 
-* Action space ($A$)
-* ~~Percept space ($P$)~~ ($P = S \because $ fully observable environment assumption)
-* State space ($S$)
-* World dynamics ($T:S\times A\to S$)
-* ~~Percept function ($Z:S\to P$)~~ ($Z = I_S \because$ fully observable)
-* Utility function ($U:S\to\mathbb{R}$)
+* Action space (<img src="https://latex.codecogs.com/gif.latex\?A" />)
+* ~~Percept space (<img src="https://latex.codecogs.com/gif.latex\?P" />)~~ (<img src="https://latex.codecogs.com/gif.latex\?P%20%3D%20S%20%5Cbecause%20" /> fully observable environment assumption)
+* State space (<img src="https://latex.codecogs.com/gif.latex\?S" />)
+* World dynamics (<img src="https://latex.codecogs.com/gif.latex\?T%3AS%5Ctimes%20A%5Cto%20S" />)
+* ~~Percept function (<img src="https://latex.codecogs.com/gif.latex\?Z%3AS%5Cto%20P" />)~~ (<img src="https://latex.codecogs.com/gif.latex\?Z%20%3D%20I_S%20%5Cbecause" /> fully observable)
+* Utility function (<img src="https://latex.codecogs.com/gif.latex\?U%3AS%5Cto%5Cmathbb%7BR%7D" />)
 
 
 
 ## Recall the problem the agent should solve
 
-Trying to find a mapping from sequences of percepts to an action ($P^n \to A$) that maximises the utility function.
+Trying to find a mapping from sequences of percepts to an action (<img src="https://latex.codecogs.com/gif.latex\?P%5En%20%5Cto%20A" />) that maximises the utility function.
 
-* Given the sequences of percepts (or spaces in the first part of this class) that the agent has seen so far, what should the agent do next, so that $U$ is maximised?
+* Given the sequences of percepts (or spaces in the first part of this class) that the agent has seen so far, what should the agent do next, so that <img src="https://latex.codecogs.com/gif.latex\?U" /> is maximised?
   * **Search** is a way to solve this problem
 
 ## Introduction to search
@@ -39,7 +39,7 @@ The image above represents the possibilities of just one time step, but to find 
 
 **How do we explore this massive search space to find the solution in the least number of steps?**
 
-* If the solution is 10 steps away, and we have 4 branches each step, the number of calculations required is of the order of $4^{10}$.
+* If the solution is 10 steps away, and we have 4 branches each step, the number of calculations required is of the order of <img src="https://latex.codecogs.com/gif.latex\?4%5E%7B10%7D" />.
 
 ### Types of search
 
@@ -79,11 +79,11 @@ Must find a sequence of actions to move the agent from being in the initial stat
 
 ## State graph representation
 
-**Definition**: a weighted directed graph (digraph) is a pair $(V, E)$ of a vertex set $V$ and an edge set $E$.
+**Definition**: a weighted directed graph (digraph) is a pair <img src="https://latex.codecogs.com/gif.latex\?%28V%2C%20E%29" /> of a vertex set <img src="https://latex.codecogs.com/gif.latex\?V" /> and an edge set <img src="https://latex.codecogs.com/gif.latex\?E" />.
 
 * Vertices represent states
 * Edges represent world dynamics
-  * Each edge $\overline{s s'}$ is labelled by the cost to move from $s$ to $s'$. It may also be labelled by the action to move from state $s$ to $s'$ (i.e. **weighted** graph)
+  * Each edge <img src="https://latex.codecogs.com/gif.latex\?%5Coverline%7Bs%20s%27%7D" /> is labelled by the cost to move from <img src="https://latex.codecogs.com/gif.latex\?s" /> to <img src="https://latex.codecogs.com/gif.latex\?s%27" />. It may also be labelled by the action to move from state <img src="https://latex.codecogs.com/gif.latex\?s" /> to <img src="https://latex.codecogs.com/gif.latex\?s%27" /> (i.e. **weighted** graph)
 * Initial and goal states -- initial & goal verticies
 * The solution is a path from the initial vertex to the goal vertex in the state graph
 * The cost is the sum of the cost associated with each edge in the path
@@ -119,14 +119,14 @@ Must find a sequence of actions to move the agent from being in the initial stat
 
 1. Put initial vertex in a "container" of states to be expanded
 2. Loop:
-   * Select a vertex, $v$ from the "container"
-     * If $v$ is the goal vertex, then return
-     * Expand $v$ (i.e. put the results of `successor(`$v$`)` to the "container")
-3. `successor(`$v$`)` is a function that:
-   1. Takes a vertex $v$ as input
-   2. Outputs the set of immediate next vertices that can be visited from $v$ (i.e. the endpoints of out-edges from $v$)
+   * Select a vertex, <img src="https://latex.codecogs.com/gif.latex\?v" /> from the "container"
+     * If <img src="https://latex.codecogs.com/gif.latex\?v" /> is the goal vertex, then return
+     * Expand <img src="https://latex.codecogs.com/gif.latex\?v" /> (i.e. put the results of `successor(`<img src="https://latex.codecogs.com/gif.latex\?v" />`)` to the "container")
+3. `successor(`<img src="https://latex.codecogs.com/gif.latex\?v" />`)` is a function that:
+   1. Takes a vertex <img src="https://latex.codecogs.com/gif.latex\?v" /> as input
+   2. Outputs the set of immediate next vertices that can be visited from <img src="https://latex.codecogs.com/gif.latex\?v" /> (i.e. the endpoints of out-edges from <img src="https://latex.codecogs.com/gif.latex\?v" />)
 
-### "Container" + expanded nodes $\to$ search tree
+### "Container" + expanded nodes <img src="https://latex.codecogs.com/gif.latex\?%5Cto" /> search tree
 
 To keep track of our visited vertices, we referenced the idea of a "container" and expanded nodes. This is typically represented by a **search tree**.
 
@@ -140,7 +140,7 @@ To keep track of our visited vertices, we referenced the idea of a "container" a
 
   ![State space search tree](.\Images\Lecture 2\state-space-search-tree.png)
 
-  Note: the tree above would continue infinitely due to the loops from $s$ to $b$ and $c$ -- we only draw the first 3 levels. We assume the initial state is $s$.
+  Note: the tree above would continue infinitely due to the loops from <img src="https://latex.codecogs.com/gif.latex\?s" /> to <img src="https://latex.codecogs.com/gif.latex\?b" /> and <img src="https://latex.codecogs.com/gif.latex\?c" /> -- we only draw the first 3 levels. We assume the initial state is <img src="https://latex.codecogs.com/gif.latex\?s" />.
 
 * **Container** is what's known as the **fringe** of the tree.
 
@@ -152,11 +152,11 @@ To keep track of our visited vertices, we referenced the idea of a "container" a
 
     1. Put initial vertex as root of the search tree
     2. Loop:
-       * Select a fringe node $t$
-         * If $t$ corresponds to the goal vertex, then return
-         * Expand $t$:
-           * Suppose $t$ corresponds to a vertex $v$ of the state graph
-           * Put the results of `successor(`$v$`)` as children of $t$ in the search tree
+       * Select a fringe node <img src="https://latex.codecogs.com/gif.latex\?t" />
+         * If <img src="https://latex.codecogs.com/gif.latex\?t" /> corresponds to the goal vertex, then return
+         * Expand <img src="https://latex.codecogs.com/gif.latex\?t" />:
+           * Suppose <img src="https://latex.codecogs.com/gif.latex\?t" /> corresponds to a vertex <img src="https://latex.codecogs.com/gif.latex\?v" /> of the state graph
+           * Put the results of `successor(`<img src="https://latex.codecogs.com/gif.latex\?v" />`)` as children of <img src="https://latex.codecogs.com/gif.latex\?t" /> in the search tree
     3. Various search methods (e.g. breadth-first search) differ in:
        * Which node to expands next (i.e. retrieval order of the container)
        * How to expand
@@ -169,30 +169,30 @@ To keep track of our visited vertices, we referenced the idea of a "container" a
   * Optimal: return a minimum cost path whenever one exists
 * **Complexity**
   * Time (# steps) and space (memory) complexity
-  * How the required time and memory needed to solve the problem increases as the input size increases (big $O$ notation)
+  * How the required time and memory needed to solve the problem increases as the input size increases (big <img src="https://latex.codecogs.com/gif.latex\?O" /> notation)
   * Input size: size of the **state** and **action spaces** of the search problem
     * In state graph representation, the **size** of the graph
-  * Use computational complexity notation (e.g. big-$O$)
+  * Use computational complexity notation (e.g. big-<img src="https://latex.codecogs.com/gif.latex\?O" />)
 
-### Big-$O$ definition
+### Big-<img src="https://latex.codecogs.com/gif.latex\?O" /> definition
 
-Suppose $f(n)$ is the required time/space required to solve the problem if the input size is $n$. Then we say $f(n)$ is of complexity $O(g(n))$ whenever:
+Suppose <img src="https://latex.codecogs.com/gif.latex\?f%28n%29" /> is the required time/space required to solve the problem if the input size is <img src="https://latex.codecogs.com/gif.latex\?n" />. Then we say <img src="https://latex.codecogs.com/gif.latex\?f%28n%29" /> is of complexity <img src="https://latex.codecogs.com/gif.latex\?O%28g%28n%29%29" /> whenever:
 
-* There is a constant $k$ and $n_0$ such that:
-  $$
+* There is a constant <img src="https://latex.codecogs.com/gif.latex\?k" /> and <img src="https://latex.codecogs.com/gif.latex\?n_0" /> such that:
+  <img src="https://latex.codecogs.com/gif.latex\?" />
   0 \le f(n) \le k \cdot g(n) \quad \forall n \ge n_0
-  $$
+  <img src="https://latex.codecogs.com/gif.latex\?" />
   
 
 ### Branching factor definition
 
-See diagram below: $b$ is the branching factor for each tree, $n$ is the size of the tree.
+See diagram below: <img src="https://latex.codecogs.com/gif.latex\?b" /> is the branching factor for each tree, <img src="https://latex.codecogs.com/gif.latex\?n" /> is the size of the tree.
 
 ![Branching factor](.\Images\Lecture 2\branching-factor.png)
 
 ### Problem example: Navigation app
 
-Given a map, how do I move from point $A$ to $B$? Also see Tutorial 1, problem 2.
+Given a map, how do I move from point <img src="https://latex.codecogs.com/gif.latex\?A" /> to <img src="https://latex.codecogs.com/gif.latex\?B" />? Also see Tutorial 1, problem 2.
 
 ![Navigation app](.\Images\Lecture 2\navigation-app.png)
 
@@ -219,21 +219,21 @@ Examples:
 
 
 
-1. Set initial vertex $I$ as the root of the search tree
+1. Set initial vertex <img src="https://latex.codecogs.com/gif.latex\?I" /> as the root of the search tree
 
-2. Push $I$ to the queue
+2. Push <img src="https://latex.codecogs.com/gif.latex\?I" /> to the queue
 
 3. Loop
 
-   1. Assign $t:=$ `front of the queue`
+   1. Assign <img src="https://latex.codecogs.com/gif.latex\?t%3A%3D" /> `front of the queue`
 
-   2. Remove $t$ from the queue and mark $t$ as expanded
-   3. If $t$ is the goal vertex, then return
+   2. Remove <img src="https://latex.codecogs.com/gif.latex\?t" /> from the queue and mark <img src="https://latex.codecogs.com/gif.latex\?t" /> as expanded
+   3. If <img src="https://latex.codecogs.com/gif.latex\?t" /> is the goal vertex, then return
 
-   3. For each $v$ in `successor(`$t$`)`:
-      * If $v$ is not in the tree yet
-        * Push $v$ to the queue
-        * Put $v$ as a child of $t$ in the search tree
+   3. For each <img src="https://latex.codecogs.com/gif.latex\?v" /> in `successor(`<img src="https://latex.codecogs.com/gif.latex\?t" />`)`:
+      * If <img src="https://latex.codecogs.com/gif.latex\?v" /> is not in the tree yet
+        * Push <img src="https://latex.codecogs.com/gif.latex\?v" /> to the queue
+        * Put <img src="https://latex.codecogs.com/gif.latex\?v" /> as a child of <img src="https://latex.codecogs.com/gif.latex\?t" /> in the search tree
 
 
 
@@ -245,20 +245,20 @@ Using the Navigation App example above:
 
 #### BFS properties & analysis
 
-* $b$: branching factor
-* $d$ depth of shallowest goal node
+* <img src="https://latex.codecogs.com/gif.latex\?b" />: branching factor
+* <img src="https://latex.codecogs.com/gif.latex\?d" /> depth of shallowest goal node
 * Complete?
-  * Complete if $b$ is finite
+  * Complete if <img src="https://latex.codecogs.com/gif.latex\?b" /> is finite
 * Optimal (in terms of # steps)
   * Yes, we never go beyond the depth of the goal
   * We don't consider cost in BFS since it's uninformed
 * Complexity
   * Time
-    * $1 + b + b^2 + ... + b^d = \frac{b^{d+1} - 1}{b - 1}$
-    * so $O(b^d)$ for # steps
+    * <img src="https://latex.codecogs.com/gif.latex\?1%20%2B%20b%20%2B%20b%5E2%20%2B%20...%20%2B%20b%5Ed%20%3D%20%5Cfrac%7Bb%5E%7Bd%2B1%7D%20-%201%7D%7Bb%20-%201%7D" />
+    * so <img src="https://latex.codecogs.com/gif.latex\?O%28b%5Ed%29" /> for # steps
   * Space
-    * Explored nodes: $O(b^{d-1})$ + unexplored nodes: $O(b^d)$
-    * so $O(b^d)$ for # nodes remembered
+    * Explored nodes: <img src="https://latex.codecogs.com/gif.latex\?O%28b%5E%7Bd-1%7D%29" /> + unexplored nodes: <img src="https://latex.codecogs.com/gif.latex\?O%28b%5Ed%29" />
+    * so <img src="https://latex.codecogs.com/gif.latex\?O%28b%5Ed%29" /> for # nodes remembered
 * **Finds minimum step path, but requires exponential space and time!**
 
 
@@ -269,7 +269,7 @@ Using the Navigation App example above:
 
 ![Bidirectional BFS](.\Images\Lecture 2\bidirectional-bfs.png)
 
-* Time and space complexity is $O(b^{d/2}) << O(b^d)$
+* Time and space complexity is <img src="https://latex.codecogs.com/gif.latex\?O%28b%5E%7Bd/2%7D%29%20%3C%3C%20O%28b%5Ed%29" />
 
 
 
@@ -283,21 +283,21 @@ Using the Navigation App example above:
 
 
 
-1. Set initial vertex $I$ as the root of the search tree
+1. Set initial vertex <img src="https://latex.codecogs.com/gif.latex\?I" /> as the root of the search tree
 
-2. Push $I$ to the stack
+2. Push <img src="https://latex.codecogs.com/gif.latex\?I" /> to the stack
 
 3. Loop
 
-   1. Assign $t:=$ `top of the stack`
+   1. Assign <img src="https://latex.codecogs.com/gif.latex\?t%3A%3D" /> `top of the stack`
 
-   2. Remove $t$ from the stack and mark $t$ as expanded
-   3. If $t$ is the goal vertex, then return
+   2. Remove <img src="https://latex.codecogs.com/gif.latex\?t" /> from the stack and mark <img src="https://latex.codecogs.com/gif.latex\?t" /> as expanded
+   3. If <img src="https://latex.codecogs.com/gif.latex\?t" /> is the goal vertex, then return
 
-   3. For each $v$ in `successor(`$t$`)`:
-      - If $v$ is not in the path to $t$ yet:
-        - Push $v$ to the stack
-        - Put $v$ as a child of $t$ in the search tree
+   3. For each <img src="https://latex.codecogs.com/gif.latex\?v" /> in `successor(`<img src="https://latex.codecogs.com/gif.latex\?t" />`)`:
+      - If <img src="https://latex.codecogs.com/gif.latex\?v" /> is not in the path to <img src="https://latex.codecogs.com/gif.latex\?t" /> yet:
+        - Push <img src="https://latex.codecogs.com/gif.latex\?v" /> to the stack
+        - Put <img src="https://latex.codecogs.com/gif.latex\?v" /> as a child of <img src="https://latex.codecogs.com/gif.latex\?t" /> in the search tree
 
 
 
@@ -309,20 +309,20 @@ Using the navigation app example from before:
 
 #### DFS properties & analysis
 
-- $b$: branching factor
-- $m$ maximum depth
+- <img src="https://latex.codecogs.com/gif.latex\?b" />: branching factor
+- <img src="https://latex.codecogs.com/gif.latex\?m" /> maximum depth
 - Complete?
-  - Complete if $b$ and $m$ are finite and nodes are not revisited
+  - Complete if <img src="https://latex.codecogs.com/gif.latex\?b" /> and <img src="https://latex.codecogs.com/gif.latex\?m" /> are finite and nodes are not revisited
   - If nodes can be revisited, it's possible to get stuck in a cycle
 - Optimal (in terms of # steps)
   - No, we may choose the longest path straight off the bat as we just dive straight in going down
   - We don't consider cost in BFS since it's uninformed
 - Complexity
   - Time
-    - $1 + b + b^2 + ... + b^m = \frac{b^{m+1} - 1}{b - 1}$
-    - so $O(b^m)$ for # steps
+    - <img src="https://latex.codecogs.com/gif.latex\?1%20%2B%20b%20%2B%20b%5E2%20%2B%20...%20%2B%20b%5Em%20%3D%20%5Cfrac%7Bb%5E%7Bm%2B1%7D%20-%201%7D%7Bb%20-%201%7D" />
+    - so <img src="https://latex.codecogs.com/gif.latex\?O%28b%5Em%29" /> for # steps
   - Space
-    - Can be implemented using $O(bm)$ or $O(m)$ using backtracking DFS but be careful of revisiting vertices (states)!
+    - Can be implemented using <img src="https://latex.codecogs.com/gif.latex\?O%28bm%29" /> or <img src="https://latex.codecogs.com/gif.latex\?O%28m%29" /> using backtracking DFS but be careful of revisiting vertices (states)!
 - **Efficient in use of space!**
 
 ### Iterative deepening depth first search
@@ -334,8 +334,8 @@ Using the navigation app example from before:
 * Iterative deepening:
   * Best of both worlds. Run multiple DFS but increase the depth cutoff each time until goal is found.
     * For $k = 1, 2, ...  do
-      * Perform DFS with depth cutoff $k$
-        * Only generates nodes with depth $\le k$.
+      * Perform DFS with depth cutoff <img src="https://latex.codecogs.com/gif.latex\?k" />
+        * Only generates nodes with depth <img src="https://latex.codecogs.com/gif.latex\?%5Cle%20k" />.
 
 
 
@@ -345,13 +345,13 @@ Using the navigation app again:
 
 #### DFS properties & analysis
 
-- $b$: branching factor
+- <img src="https://latex.codecogs.com/gif.latex\?b" />: branching factor
 
-- $d$: depth of shallowest goal node
+- <img src="https://latex.codecogs.com/gif.latex\?d" />: depth of shallowest goal node
 
 - Complete?
 
-  - Complete if $b$ is finite
+  - Complete if <img src="https://latex.codecogs.com/gif.latex\?b" /> is finite
 
 - Optimal (in terms of # steps)
 
@@ -362,43 +362,43 @@ Using the navigation app again:
 
   - Time
 
-    - $O(b^d)$ for # steps
+    - <img src="https://latex.codecogs.com/gif.latex\?O%28b%5Ed%29" /> for # steps
 
       Proof:
 
-      In an iterative deepening search, the nodes at depth $d$ are expanded once, those at depth $d-1$ are expanded twice, and so on up to the root of the search tree, which is expanded $d+1$. So the total number of expansions in an iterative deepening search is
-      $$
+      In an iterative deepening search, the nodes at depth <img src="https://latex.codecogs.com/gif.latex\?d" /> are expanded once, those at depth <img src="https://latex.codecogs.com/gif.latex\?d-1" /> are expanded twice, and so on up to the root of the search tree, which is expanded <img src="https://latex.codecogs.com/gif.latex\?d%2B1" />. So the total number of expansions in an iterative deepening search is
+      <img src="https://latex.codecogs.com/gif.latex\?" />
       b^{d}+2b^{d-1}+3b^{d-2}+\cdots +(d-1)b^{2}+db+(d+1)
-      $$
-      where $b^d$ is the number of expansions at depth $d$, $2b^{d-1}$ is the number of expansions at depth $d-1$, etc.
+      <img src="https://latex.codecogs.com/gif.latex\?" />
+      where <img src="https://latex.codecogs.com/gif.latex\?b%5Ed" /> is the number of expansions at depth <img src="https://latex.codecogs.com/gif.latex\?d" />, <img src="https://latex.codecogs.com/gif.latex\?2b%5E%7Bd-1%7D" /> is the number of expansions at depth <img src="https://latex.codecogs.com/gif.latex\?d-1" />, etc.
 
-      Factoring out $b^d$ gives
-      $$
+      Factoring out <img src="https://latex.codecogs.com/gif.latex\?b%5Ed" /> gives
+      <img src="https://latex.codecogs.com/gif.latex\?" />
       {\displaystyle b^{d}(1+2b^{-1}+3b^{-2}+\cdots +(d-1)b^{2-d}+db^{1-d}+(d+1)b^{-d})}
-      $$
-      Now let $x = 1/b = b^{-1}$. Then we have
-      $$
+      <img src="https://latex.codecogs.com/gif.latex\?" />
+      Now let <img src="https://latex.codecogs.com/gif.latex\?x%20%3D%201/b%20%3D%20b%5E%7B-1%7D" />. Then we have
+      <img src="https://latex.codecogs.com/gif.latex\?" />
       {\displaystyle b^{d}(1+2x+3x^{2}+\cdots +(d-1)x^{d-2}+dx^{d-1}+(d+1)x^{d})}.
-      $$
+      <img src="https://latex.codecogs.com/gif.latex\?" />
       This is less than the infinite series
-      $$
+      <img src="https://latex.codecogs.com/gif.latex\?" />
       {\displaystyle b^{d}(1+2x+3x^{2}+4x^{3}+\cdots )}
-      $$
+      <img src="https://latex.codecogs.com/gif.latex\?" />
       which converges to (see [geometric power series](https://en.wikipedia.org/wiki/Geometric_series#Geometric_power_series))
-      $$
+      <img src="https://latex.codecogs.com/gif.latex\?" />
       {\displaystyle b^{d}(1-x)^{-2}=b^{d}{\frac {1}{(1-x)^{2}}}, \quad |x|<1}
-      $$
+      <img src="https://latex.codecogs.com/gif.latex\?" />
       That is, we have
-      $$
+      <img src="https://latex.codecogs.com/gif.latex\?" />
       b^{d}+2b^{d-1}+3b^{d-2}+\cdots +(d-1)b^{2}+db+(d+1)\leq b^{d}(1-x)^{-2}
-      $$
-      whenever $|x| < 1$.
+      <img src="https://latex.codecogs.com/gif.latex\?" />
+      whenever <img src="https://latex.codecogs.com/gif.latex\?%7Cx%7C%20%3C%201" />.
 
-      Since $(1-x)^{-2}$ or $\left(1 - \frac{1}{b}\right)^{-2}$ is constant independent of $d$ (the depth), if $b > 1$ (i.e., if the branching factor is greater than 1), the running time of the depth-first iterative deepening search is $O(b^d)$ :call_me_hand:
+      Since <img src="https://latex.codecogs.com/gif.latex\?%281-x%29%5E%7B-2%7D" /> or <img src="https://latex.codecogs.com/gif.latex\?%5Cleft%281%20-%20%5Cfrac%7B1%7D%7Bb%7D%5Cright%29%5E%7B-2%7D" /> is constant independent of <img src="https://latex.codecogs.com/gif.latex\?d" /> (the depth), if <img src="https://latex.codecogs.com/gif.latex\?b%20%3E%201" /> (i.e., if the branching factor is greater than 1), the running time of the depth-first iterative deepening search is <img src="https://latex.codecogs.com/gif.latex\?O%28b%5Ed%29" /> :call_me_hand:
 
   - Space
 
-    - Can be implemented using $O(bd)$
+    - Can be implemented using <img src="https://latex.codecogs.com/gif.latex\?O%28bd%29" />
 
 - **Efficient in use of space!**
 
@@ -411,39 +411,39 @@ See this video as a comparison of DFS vs. IDDFS to see how much faster the latte
 ### Uniform cost search
 
 * Expand fringe node with lowest cost from root
-  * So let $c(n)$ be the cost from root to node $n$
-  * Expand $n$ with lowest $c$ value first
+  * So let <img src="https://latex.codecogs.com/gif.latex\?c%28n%29" /> be the cost from root to node <img src="https://latex.codecogs.com/gif.latex\?n" />
+  * Expand <img src="https://latex.codecogs.com/gif.latex\?n" /> with lowest <img src="https://latex.codecogs.com/gif.latex\?c" /> value first
 * Use a **priority queue (PQ)** to keep fringe nodes (container)
   * Abstract data structure where data with the highest priority is retrieved first.
   * In our navigation example, priority is the node with the shortest path length from root to the node.
 
 ![Navigation app graph](.\Images\Lecture 2\navigation-app-graph.png)
 
-1. Set the initial vertex $I$ as the root of the search tree
-2. Push $I$ to the PQ
+1. Set the initial vertex <img src="https://latex.codecogs.com/gif.latex\?I" /> as the root of the search tree
+2. Push <img src="https://latex.codecogs.com/gif.latex\?I" /> to the PQ
 3. Loop
-   1. Assign $t:=$`retrieve a node from PQ`
-   2. Remove $t$ from PQ and mark $t$ as expanded
-   3. If $t$ is the goal vertex, then return
-   4. For each $v$ in `successor(`$t$`)`:
-      * If $v$ has not been expanded yet
-        * Insert $v$ to the PQ
-        * Put $v$ as a child of $t$ in the search tree
+   1. Assign <img src="https://latex.codecogs.com/gif.latex\?t%3A%3D" />`retrieve a node from PQ`
+   2. Remove <img src="https://latex.codecogs.com/gif.latex\?t" /> from PQ and mark <img src="https://latex.codecogs.com/gif.latex\?t" /> as expanded
+   3. If <img src="https://latex.codecogs.com/gif.latex\?t" /> is the goal vertex, then return
+   4. For each <img src="https://latex.codecogs.com/gif.latex\?v" /> in `successor(`<img src="https://latex.codecogs.com/gif.latex\?t" />`)`:
+      * If <img src="https://latex.codecogs.com/gif.latex\?v" /> has not been expanded yet
+        * Insert <img src="https://latex.codecogs.com/gif.latex\?v" /> to the PQ
+        * Put <img src="https://latex.codecogs.com/gif.latex\?v" /> as a child of <img src="https://latex.codecogs.com/gif.latex\?t" /> in the search tree
 
 ![Uniform cost search worked example](.\Images\Lecture 2\uniform-cost-search-nav-app-graph-worked-algorithm.png)
 
 #### Uniform cost search properties & analysis
 
-- $b$: branching factor
-- $m$ maximum depth
-- $C^*$: cost of optimal solution
-- $\epsilon$: minimum cost of a step
+- <img src="https://latex.codecogs.com/gif.latex\?b" />: branching factor
+- <img src="https://latex.codecogs.com/gif.latex\?m" /> maximum depth
+- <img src="https://latex.codecogs.com/gif.latex\?C%5E%2A" />: cost of optimal solution
+- <img src="https://latex.codecogs.com/gif.latex\?%5Cepsilon" />: minimum cost of a step
 - Complete?
-  - Complete if $b$ is finite and all edges have a cost $\gt \epsilon$ (i.e. a small positive number) 
+  - Complete if <img src="https://latex.codecogs.com/gif.latex\?b" /> is finite and all edges have a cost <img src="https://latex.codecogs.com/gif.latex\?%5Cgt%20%5Cepsilon" /> (i.e. a small positive number) 
 - Optimal (in terms of # steps)
   - Yes, if all edges have a positive cost
 - Complexity
-  - Time **and** space: $O\left(b^{1 + \mathrm{floor}\left( c^* / \epsilon \right)} \right)$
+  - Time **and** space: <img src="https://latex.codecogs.com/gif.latex\?O%5Cleft%28b%5E%7B1%20%2B%20%5Cmathrm%7Bfloor%7D%5Cleft%28%20c%5E%2A%20/%20%5Cepsilon%20%5Cright%29%7D%20%5Cright%29" />
 
 ## Summary
 
@@ -457,8 +457,8 @@ See this video as a comparison of DFS vs. IDDFS to see how much faster the latte
 
 | Algorithm    | Complete?                                       | Optimal?                           | Time                                                         | Space                                                        |
 | ------------ | ----------------------------------------------- | ---------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| BFS          | Yes if $b$ finite                               | Yes                                | $O(b^d)$                                                     | $O(b^d)$                                                     |
-| DFS          | Yes if $m, b$ finite & no revisiting            | No                                 | $O(b^m)$                                                     | $O(bm)$ or $O(m)$ w/ backtracking                            |
-| IDDFS        | Yes if $b$ finite                               | Yes                                | $O(b^d)$                                                     | $O(bd)$                                                      |
-| Uniform Cost | Yes if $b$ finite & all edges have cost $\gt 0$ | Yes if all edges have cost $\gt 0$ | $O\left(b^{1 + \mathrm{floor}\left( c^* / \epsilon \right)} \right)$ | $O\left(b^{1 + \mathrm{floor}\left( c^* / \epsilon \right)} \right)$ |
+| BFS          | Yes if <img src="https://latex.codecogs.com/gif.latex\?b" /> finite                               | Yes                                | <img src="https://latex.codecogs.com/gif.latex\?O%28b%5Ed%29" />                                                     | <img src="https://latex.codecogs.com/gif.latex\?O%28b%5Ed%29" />                                                     |
+| DFS          | Yes if <img src="https://latex.codecogs.com/gif.latex\?m%2C%20b" /> finite & no revisiting            | No                                 | <img src="https://latex.codecogs.com/gif.latex\?O%28b%5Em%29" />                                                     | <img src="https://latex.codecogs.com/gif.latex\?O%28bm%29" /> or <img src="https://latex.codecogs.com/gif.latex\?O%28m%29" /> w/ backtracking                            |
+| IDDFS        | Yes if <img src="https://latex.codecogs.com/gif.latex\?b" /> finite                               | Yes                                | <img src="https://latex.codecogs.com/gif.latex\?O%28b%5Ed%29" />                                                     | <img src="https://latex.codecogs.com/gif.latex\?O%28bd%29" />                                                      |
+| Uniform Cost | Yes if <img src="https://latex.codecogs.com/gif.latex\?b" /> finite & all edges have cost <img src="https://latex.codecogs.com/gif.latex\?%5Cgt%200" /> | Yes if all edges have cost <img src="https://latex.codecogs.com/gif.latex\?%5Cgt%200" /> | <img src="https://latex.codecogs.com/gif.latex\?O%5Cleft%28b%5E%7B1%20%2B%20%5Cmathrm%7Bfloor%7D%5Cleft%28%20c%5E%2A%20/%20%5Cepsilon%20%5Cright%29%7D%20%5Cright%29" /> | <img src="https://latex.codecogs.com/gif.latex\?O%5Cleft%28b%5E%7B1%20%2B%20%5Cmathrm%7Bfloor%7D%5Cleft%28%20c%5E%2A%20/%20%5Cepsilon%20%5Cright%29%7D%20%5Cright%29" /> |
 
