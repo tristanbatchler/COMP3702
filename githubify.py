@@ -20,7 +20,7 @@ if __name__ == '__main__':
             if not display:
                 latex = re.findall('\\$(.*?)\\$', line_raw)
                 for l in latex:
-                    print(l)
+                    #print(l)
                     q = urllib.parse.quote(l)
                     md = '![%s](https://latex.codecogs.com/gif.latex?%s)' % (q, q)
                     line_mod = line_mod.replace('$%s$' % l, md)
@@ -44,3 +44,5 @@ if __name__ == '__main__':
     with open(args.file_in, 'w') as f:
         for item in lines_mod:
             f.write("%s" % item)
+
+    print("githubified", args.file_in)
