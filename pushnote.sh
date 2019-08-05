@@ -1,9 +1,3 @@
-if [[ $# -ne 1 ]]
-then
-    echo 1>&2 "Usage: $0 \"commit message\""
-    exit 3
-fi
-
 MODIFIED="$(git status | grep modified | sed 's/\(.*modified:\s*\)//')"
 ADDED="$(git status | grep "new file" | sed 's/\(.*new file:\s*\)//')"
 
@@ -32,5 +26,3 @@ done <<< "$ADDED"
 
 git commit -m "$1"
 git push origin master
-
-git checkout development
