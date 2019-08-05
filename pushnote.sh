@@ -6,9 +6,9 @@ git commit -m "$1"
 git push origin development
 
 git checkout master
-git checkout development .
 
 while read -r line; do
+    git checkout development "$line"
     if [[ "$line" == *.md ]] 
     then
       python githubify.py "$line"  
@@ -17,6 +17,7 @@ while read -r line; do
 done <<< "$MODIFIED"
 
 while read -r line; do
+    git checkout development "$line"
     if [[ "$line" == *.md ]] 
     then
       python githubify.py "$line"  

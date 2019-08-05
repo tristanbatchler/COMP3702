@@ -1,10 +1,11 @@
 # Lecture 1
-#Hello
 ## Rational Agent
 ### Definition
 A program that has the ability to perceive an environment and produce a rational decision based on that perception.
 
 The environment can also change due to actions the agent has made allowing for a kind of feedback loop.
+
+$e=mc^2$
 
 ### The components
 * Action space ($A$)
