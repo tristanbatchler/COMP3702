@@ -5,8 +5,6 @@ A program that has the ability to perceive an environment and produce a rational
 
 The environment can also change due to actions the agent has made allowing for a kind of feedback loop.
 
-$e=mc^2$
-
 ### The components
 * Action space ($A$)
   * The set of all actions the agent can perform
