@@ -5,8 +5,6 @@ A program that has the ability to perceive an environment and produce a rational
 
 The environment can also change due to actions the agent has made allowing for a kind of feedback loop.
 
-![e%3Dmc%5E2](https://latex.codecogs.com/gif.latex?e%3Dmc%5E2)
-
 ### The components
 * Action space (![A](https://latex.codecogs.com/gif.latex?A))
   * The set of all actions the agent can perform

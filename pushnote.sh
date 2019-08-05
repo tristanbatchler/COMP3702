@@ -12,8 +12,8 @@ while read -r line; do
     if [[ "$line" == *.md ]] 
     then
       python githubify.py "$line"  
-      git add "$line"
     fi
+    git add "$line"
 done <<< "$MODIFIED"
 
 while read -r line; do
@@ -21,9 +21,11 @@ while read -r line; do
     if [[ "$line" == *.md ]] 
     then
       python githubify.py "$line"  
-      git add "$line"
     fi
+    git add "$line"
 done <<< "$ADDED"
 
 git commit -m "$1"
 git push origin master
+
+git checkout development
