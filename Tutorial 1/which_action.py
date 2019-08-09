@@ -33,7 +33,7 @@ if __name__ == "__main__":
     
     # If swapping the positions of the blank symbols doesn't result in the same state, no one action can transition to the goal state
     if s_i.replace(BLANK, s_f[blank_idx_i]) != s_f.replace(BLANK, s_i[blank_idx_f]):
-        print("NOT POSSIBLE")
+        print("IMPOSSIBLE")
         exit()
 
     # Direction to move in (dx, dy) := blank_idx_f - blank_idx_i
