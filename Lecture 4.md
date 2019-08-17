@@ -6,4 +6,4 @@
 * Sample a set of states uniformly at random
   * Vertices in the state graph (called roadmap)
 
-![img](/home/tristan/School/COMP3702/Images/Lecture 4/prm-visualisation.gif)
+![img](https://raw.githubusercontent.com/tristanbatchler/COMP3702/master/Images/Lecture%204/prm-visualisation.gif)
