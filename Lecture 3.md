@@ -205,6 +205,7 @@ Revisiting nodes will guarantee optimality regardless of whether the heuristic i
   ![Consistent heuristic](.\Images\Lecture 3\consistent-heuristic.png)
 
 * If the heuristic is consistent/monotonic, when A* expands a node $n$, the path to $n$ is **optimal**.
+  
   * Therefore, we don't need to revisit nodes that have been expanded
 
 Therefore, if $h$ is consistent, we can adjust the algorithm for A* to be:
@@ -275,3 +276,146 @@ Examples:
 
 
 
+## Search in a Continuous Space & Motion Planning
+
+### Agenda
+
+* [Introduction to Motion Planning](#introduction-to-motion-planning)
+* [Point robot in a 2D world](#point-robot-in-a-2d-world)
+  * Formulating the problem as a search problem and solving it
+* [More general case](#more-general-case)
+  * Formulating the problem
+  * Solving the problem using a Probablistic Roadmap (PRM)
+
+
+
+### Introduction to Motion Planning
+
+* Motion planning is the study of computational methods to enable an agent to compute its own motions for moving from a given initial state to a goal state
+* Various applications:
+  * Solving those tricky Chinese puzzles
+  * Assembling cars and planes
+  * Computer games
+
+### Point robot in a 2D world
+
+* A point robot operating in a 2D space
+* Find a collision-free path between a state and goal position of the robot (i.e. navigate a maze)
+* Essentially a search problem but with a **continuous** search and action space
+  * Size of state graph?
+    * Naively, the size of the state graph is **infinite**
+* Could **discretise** the space
+* Many ways: e.g.
+  * Visibility graph
+  * Uniform grid discretisation
+
+
+
+#### Visibility graph
+
+* Obstacles are respresented as polygons
+* State space = undirected graph where:
+  * Nodes are vertices of the obstacles
+  * An edge between the two vertices represents an edge of the polygon or a collision-free straight line path between two vertices
+
+![1566028405238](./Images/Lecture 3/visibility-graph.png)
+
+* Given initial ($I$) & goal ($G$) states:
+  * Find the vertex $q_i$ nearest to $I$, where the straight line segment between $I$ and $q_i$ is collision-free
+  * Similarly for $G$
+* If each edge is labelled with the length of the path the edge represents, the shortest path can be found by finding the shortest path in the graph
+* Complexity ($n$: total # of vertices of the obstaces)
+  * Construction time (naive): $O(n^3)$
+  * Space $O(n^2)$
+* Have been extended (for efficiency) and used in a lot of games
+
+
+
+#### Uniform grid discretisation
+
+![1566028802542](./Images/Lecture 3/uniform-grid.png)
+
+* Obstacles do not have to be represented as polygons
+* Each grid cell that does not intersect with an obstacle becomes a vertex in the state graph. Edges between vertex $v$ and $v'$ means $v$ and $v'$ correspond to neighbouring grid cells
+* Use search on state graph as usual
+
+### More general case
+
+* **Articulated robot** operating in a 2D environment
+
+  * A robot that consists of multiple rigid bodies, connected by joints
+  * A rigid body: An object where the distance between any 2 points are constant
+
+* **Still use the same formulation**
+
+  * Similar to formulation of a rational agent
+
+* **State space**: The set of all configurations
+
+* **Configuration space / C-Space:** the set of all possible robot configurations
+
+  * ![1566029151166](./Images/Lecture 3/robot-arm-state-space.png)
+  * A **configuration** is the parameters that uniquely defines the position of every point on the robot: $q = (q_1, q_2, ..., q_n)$
+  * Usually expressed as a vector of the Degrees of Freedom (DOF) of the robot
+  * Motion planning: Find a collision-free path in this state space
+
+  
+
+  #### Some terminology in C-Space
+
+  * A configuration $q$ is **collision-free** is the robot placed at $q$ does not intersect any obstacles in the workspace
+
+  * **Forbidden region**
+  * The set of coinfigurations that will cause the robot to collide with the obstacles in the environment
+  
+  * **Free Space**
+    
+    * $CSpace \setminus ForbiddenRegion$
+
+
+
+  **Action space & transition function for the robot**
+
+    * An action: a displacement vector
+    * Transition: $q' = q + a$
+    
+    * Where $q$ and $q'$ are configuratons and $a$ is an action
+
+
+
+**Using the same method as for the point robot**
+
+* Visibility graph: polygon?
+
+  * No way, way to frikken complicated :angry:
+
+    ![1566029886325](./Images/Lecture 3/c-space.png)
+
+* Unifrom grid discretisation:
+
+  * Each grid cell that does not intersect with an obstacle become sa vertex in the state graph
+  * Edges between vertex $v$ and $v'$ means $v$ and $v'$ correspond to neighbouring grid cells
+
+* Problem: #vertices is exponention in #dimension
+
+
+
+**Problem with uniform grid discretisation**
+
+* As #joins increases, dimensionality of state space increases
+* #grid cells in uniform grid discretisation (i.e. #vertices in state graph) grows exponentially with #dimension of the state space
+  * Should not store this state graph explicitly
+* #out-edges grows exponentially with #dimension of the state space
+  * Complexity of search algs depend on #out-edges in state graph
+
+
+
+**A better alternative**
+
+* Build a small state graph that captures on the "important features" of the state space
+  * For motion planning, important features = connectivity of free space
+* Use sampling to build the graph
+
+![1566030122482](./Images/Lecture 3/alternative.png)
+
+More next week...
