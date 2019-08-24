@@ -16,7 +16,7 @@
 
    1. Sample a configuration $q$ uniformly at random from the state space
 
-      ![1566602240994](C:\Users\tristan\School\COMP3702\Images\Lecture 4\roadmap-construct-alg-1.png)
+      ![1566602240994](.\Images\Lecture 4\roadmap-construct-alg-1.png)
 
    2. If $q$ is not in collision,
 
@@ -24,7 +24,7 @@
 
       2. For all vertices $q'$ within $D$ distance from $q$ in the state graph:
 
-         ​	![1566602272435](C:\Users\tristan\School\COMP3702\Images\Lecture 4\roadmap-construct-alg-2.png)
+         ​	![1566602272435](.\Images\Lecture 4\roadmap-construct-alg-2.png)
 
          1. If the line segment (in C-space) between $q$ and $q'$ is not in-collision, add an edge $qq'$ to the state graph. Note in the example above, the line segment $qq'$ **is** in-collision, so the image below is the result of continuously iterating this algorithm until another configuration $q''$ was found for which we can connect.
 
