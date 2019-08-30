@@ -81,9 +81,91 @@ So, why bother?
 
 
 
+## Logic
+
+### Where is logic used?
+
+* Action planning?
+* IC design
+* Databases
+* Debugging
+* Game player
+
+### A formal language
+
+Composed of both:
+
+* Syntax
+  * Which expressions are legal in our formal language
+* Symantics
+  * What is the meaning of legal expressions in our formal language?
 
 
-# Logic
+
+### Many types of logic
+
+* **Propositional** logic (everything is either **True** or **False**)
+* **Predicate** logic / first order logic (**FOL**)
+* **High order** logic
 
 
+
+### Propositional logic - Syntax
+
+* **Atomic**
+
+  * An expression that is known to be either true or false
+  * E.g.
+    * $x + 2 = 2x$ when $x = 1$ is false
+    * "What is the distance between Mars and Earth?" is not propositional
+
+  * Typically denote a proposition as $p$ or $q$.
+* **Complex sentences**
+
+  * Constructed from atomic sentences and logical connectives:
+
+    * Brackets $()$, negation $\neg$, and $\and$, or $\or$, implies, $\to$, iff. $\lrarr$.
+  * If $S, S_1, S_2$ are sentences, then so are the following:
+    * $(S)$
+    * $\neg S$ is true iff. $S$ is false
+    * $S_1 \and S_2$ is true iff. $S_1$ is true or $S_2$ is true
+    * $S_1 \or S_2$ is true iff. $S_1$ is true and $S_2$ is true
+    * $S_1 \to S_2$ is true iff. $S_2$ is true or $S_1$ is false (absurd)
+    * $S_1 \lrarr S_2$ is true iff. $S_1 \to S_2 \and S_2 \to S1$ is true
+* **Semantics**
+  * Meaning of a sentence: truth values
+  * The truth of a complex sentence can be derived from the truth values of logical connectives for the given sentence
+  * i.e. truth tables
+  * Interpretation: Assignment of truth values to propositional variables
+
+
+
+### Some terminology
+
+* A sentence is **valid** if it's true for all possible interpretations, i.e. **tautology**
+* A sentence is **satisfiable** if its truth value is T fo at least one of the possible interpretations
+
+  * e.g. $\neg P$.
+  * Everything that's valid is satisfiable
+* A sentence is unsatisfiable if its truth value is F for all possible interpretations
+
+  * e.g. $P \and \neg P$
+* For propositional logic, we can always decide if a sentence is valid/satisfiable/unsatisfiable in finite time (decidable)
+* A **model** of a sentence is an interpretation that makes the sentence true
+* A sentence $A$ **entails** another sentence $B$ (denotes $A \models B$) iff. every model of $A$ is also a model of $B$ ($A \to B$ is valid)
+
+### Entailment
+
+* Relation betwen sentences are based on relations between their interpretations
+
+### How logic is used to represent a problem
+
+*  Formulate information as propositional logic sentences
+  * Create a knowledge base (KB)
+  * KB: a set of sentences, such that KB is false in models that contradict what the agent knows
+* Example: The Wumpus World
+  * See page 236 of *Artificial Intelligence: A Modern Approach*
+  * Squares adjacent to Wumpus are smelly
+  * Squares adjacent to pits are breezy
+  * Glitter iff. gold is in the same square
 
