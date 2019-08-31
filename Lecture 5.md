@@ -152,7 +152,7 @@ Composed of both:
   * e.g. $P \and \neg P$
 * For propositional logic, we can always decide if a sentence is valid/satisfiable/unsatisfiable in finite time (decidable)
 * A **model** of a sentence is an interpretation that makes the sentence true
-* A sentence $A$ **entails** another sentence $B$ (denotes $A \models B$) iff. every model of $A$ is also a model of $B$ ($A \to B$ is valid)
+* A sentence $A$ **entails** another sentence $B$ (denoted $A \models B$) iff. every model of $A$ is also a model of $B$ ($A \to B$ is valid)
 
 ### Entailment
 
