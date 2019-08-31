@@ -143,7 +143,7 @@ Composed of both:
 ### Some terminology
 
 * A sentence is **valid** if it's true for all possible interpretations, i.e. **tautology**
-* A sentence is **satisfiable** if its truth value is T fo at least one of the possible interpretations
+* A sentence is **satisfiable** if its truth value is T for at least one of the possible interpretations
 
   * e.g. $\neg P$.
   * Everything that's valid is satisfiable
@@ -156,7 +156,7 @@ Composed of both:
 
 ### Entailment
 
-* Relation betwen sentences are based on relations between their interpretations
+* Relation between sentences are based on relations between their interpretations
 
 ### How logic is used to represent a problem
 
@@ -165,7 +165,210 @@ Composed of both:
   * KB: a set of sentences, such that KB is false in models that contradict what the agent knows
 * Example: The Wumpus World
   * See page 236 of *Artificial Intelligence: A Modern Approach*
+  
   * Squares adjacent to Wumpus are smelly
+  
   * Squares adjacent to pits are breezy
+  
   * Glitter iff. gold is in the same square
+  
+    ![1567204910509](.\Images\Lecture 5\representing-wumpus-world-problem.png)
+  
+    Results of perception up to the current time can be added to the KB.
+  
+    E.g. Suppose the agent has only visited $(1, 1)$ and perceives:
+  
+    * $P_{1, 1} = \mathrm{False}$, $B_{1, 1} = \mathrm{False}$, $W_{1, 1} = \mathrm{False}$, $S_{1, 1} = \mathrm{False}$, $\mathrm{Go}_{1, 1} = \mathrm{False}$, $G_{1, 1} = \mathrm{False}$
+    * Then we can add the following sentences to the initial KB:
+      * $\neg P_{1, 1}$, $\neg B_{1, 1}$, $\neg W_{1, 1}$, $\neg S_{1, 1}$, $\neg \mathrm{Go}_{1, 1}$, $\neg G_{1, 1}$, 
+  
+    What else can we use the KB for?
+  
+    * Deduce new information, sentences entailed by the current KB can be added to the KB
+    * Answering questions such as can we conclude there's no pit in $(1, 2)$?
+    * Formally,
+      * Given the knowledge base $\mathrm{KB} := S_1, S_2, \cdots, S_n$:
+        * Does KB entail that $\neg P_{1, 2}$? i.e. does $\mathrm{KB} \models P_{1,2}$?
+        * In other words, is the sentence valid? $S_1 \and S_2 \and \cdots \and S_n \to \neg P_{1,2}$
 
+
+
+### (Simple) model checking
+
+When checking if a sentence is valid, you must check if it is valid in all models.
+
+A simple way to check this is to enumerate all the models and make a truth table.
+
+#### Model checking terminology
+
+* Sound: the result is correct
+* Complete: It always gives an answer
+* Complexity: Time, Space in $O(f(n))$ where $n$ is the number of propositional variables.
+
+### Theorem proving
+
+If $\alpha$ and $\beta$ are sentences, then two sentences are logically equivalent iff. true in the same models:
+
+$\alpha \equiv\beta \lrarr \alpha \models \beta \and \beta \models\ \alpha$
+
+Can use the following rules to show logical equivalences using the axioms
+
+![1567205673321](.\Images\Lecture 5\logical-equivalences.png)
+
+### Inference rules
+
+* Modus ponens (mode that affirms)
+
+  * $\alpha \to \beta$ says that, if $\alpha$ then $\beta$ can be inferred
+
+  * Proof by implication
+
+  * $$
+    \alpha \to \beta\\ \alpha\\\rule{2cm}{0.4pt}\\ \beta
+    $$
+
+* Modus tollens (model that denies)
+
+  * $\alpha \to \beta$ says that, if $\neg \beta$ then $\neg \alpha$ can be inferred
+
+  * i.e. $\alpha \to \beta \equiv \neg \alpha \to \neg \beta$.
+
+  * Proof by contraposition
+
+  * $$
+    \alpha \to \beta\\
+    \neg \beta\\
+    \rule{2cm}{0.4pt}\\
+    \neg \alpha
+    $$
+
+* And-elimination (for a conjunction, any of the conjuncts can be inferred)
+
+  * $\alpha \and \beta$ says that $\alpha$ can be inferred and $\beta$ can be inferred
+
+  * $$
+    \alpha \and \beta\\\rule{2cm}{0.4pt}\\ \alpha
+    $$
+
+
+
+### Theorem proving: natural deduction
+
+Use the rules available to make logical steps to arrive to a new conclusion
+
+
+
+### Theorem proving as a search problem
+
+* $S$: all possible sets of sentences (knowledge bases)
+* $A$: the set of all inference rules
+* $T:S \to S$: The act of applying an inference rule to all sentences in the knowledge base that match the form of the inference and seeing the resulting new sentences that is the inference made.
+* Initial state: initial knowledge base
+* Goal state: the state that contains the sentence we're trying to prove
+
+
+
+### Resolution
+
+A single inference rule
+$$
+\alpha \or \beta\\
+\neg \beta \or \gamma\\
+\rule{2cm}{0.4pt}\\
+\alpha \or \gamma
+$$
+But, the single inference rule is sound and complete only when applied to logical sentences written in Conjunctive Normal Form (**CNF**).
+
+### Conjunctive Normal Form (CNF)
+
+Conjunctions of disjunctions
+
+e.g. $(\neg A \or B) \and (C \or D)$.
+
+Some terminology:
+
+* **Clause**: a disjunction of literals e.g. $(\neg A \or B)$
+* **Literals**: variables or the negation of variables, e.g. $\neg A$, $B$
+
+CNF if useful for model checking.
+
+### Converting to CNF
+
+Every sentence in propositional logic can be written in CNF.
+
+Three step conversion:
+
+1. Eliminate implications using definitions (i.e.. $A \to B \equiv \neg A \or B$)
+2. Distribute negations using De Morgan's Laws (i.e. $\neg (A \or B) \equiv \neg A \and \neg B$ and $\neg (A \and B) \equiv \neg A \or \neg B$).
+3. Distribute OR over AND (i.e. $A \or (B \and C) \equiv (A \or B) \and (A \or C)$)
+
+
+
+**Example**: Convert $(A \or B) \to (C \to D)$ to CNF
+
+1. Eliminate implications: $\neg (A \or B) \or (\neg C \or D)$
+
+2. Distribute negations: $(\neg A \and \neg B) \or (\neg C \or D)$
+
+3. Distribute OR over AND: 
+   $$
+   ((\neg A \and \neg B) \or \neg C) \and ((\neg A \and \neg B) \or D)\\
+   (\neg A \or \neg C) \and (\neg B \or \neg C) \and (\neg A \or D) \and (\neg B \or D)\\
+   $$
+   
+4. Optionally simplify:
+   $$
+   ((\neg A \or \neg C) \and (\neg A \or D)) \and ((\neg B \or \neg C) \and (\neg B \or D))\\
+   (\neg A \or \neg C \or D) \and (\neg B \or \neg C \or D)
+   $$
+   
+
+### Theorem proving: resolution refutation
+
+Three steps:
+
+1. Convert all sentences into CNF
+2. Negate the desired conclusion
+3. Apply [resolution rule](#Resolution) until
+   * Derive False (a contradiction)
+   * Can't apply the rule any more
+
+
+
+Sound and complete for propositional logic
+
+* If we derive a contradiction, the conclusion follows from the axioms
+* If we can't apply any more, the conclusion cannot be proved from the axioms
+
+
+
+Example: prove the following theorem:
+$$
+a \or b\\
+\neg a \or c\\
+\rule{2cm}{0.5pt}\\
+b \or c
+$$
+
+
+
+1. Convert all sentences into CNF (already done)
+
+2. Negate the desired conclusion
+
+   $\neg b \and \neg c$
+
+3. Apply resolution until a contradiction or until we can't any more
+   $$
+   a \or b\\
+   \neg a \or c\\
+   \rule{2cm}{0.5pt}\\
+   a \or c
+   $$
+   So we can replace the theorem with
+   $$
+   a \or c\\
+   \rule{2cm}{0.5pt}\\
+   b \or c
+   $$
+   which is a contradiction to what we are trying to prove. Done? I'm confused.
