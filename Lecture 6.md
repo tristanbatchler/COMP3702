@@ -82,7 +82,24 @@ Can we find an assignment of the values of the following sentences so that the o
 
 2. Let $S := (P \or Q) \and (P \or \neg Q \or R) \and (T \or \neg R) \and (\neg P \or \neg T) \and (P \or S) \and (T \or R \or S) \and (\neg S \or T)$
 
-   * Exercise
+   * $S$ has no empty, unit, or pure clauses, so choose the variable that has the most occurrences, $T$ and run DPLL on:
+     $S(\neg T) = (P \or Q) \and (P \or \neg Q \or R) \and (\mathrm{F} \or \neg R) \and (\neg P \or \neg \mathrm{F}) \and (P \or S) \and (\mathrm{F} \or R \or S) \and (\neg S \or \mathrm{F})$
+   
+     Simplified:
+     $S(\neg T) = (P \or Q) \and (P \or \neg Q \or R) \and (\neg R) \and (P \or S) \and (R \or S) \and (\neg S)$
+   
+   * $\neg R$ is a unit clause of $S(\neg T)$, so run DPLL on:
+     $(S(\neg T))(\neg R) = (P \or Q) \and (P \or \neg Q \or \mathrm{F}) \and (\neg \mathrm{F}) \and (P \or S) \and (\mathrm{F} \or S) \and (\neg S)$
+     Simplified:
+     $(S(\neg T))(\neg R) = (P \or Q) \and (P \or \neg Q) \and (P \or S) \and (S) \and (\neg S)$
+   
+   * $S$ is a unit clause of $(S(\neg T))(\neg R)$, so run DPLL on:
+   
+     $((S(\neg T))(\neg R))(S) = (P \or Q) \and (P \or \neg Q) \and (P \or S) \and (\mathrm{T}) \and (\neg \mathrm{T})$
+     Simplified:
+     $((S(\neg T))(\neg R))(S) = (P \or Q) \and (P \or \neg Q) \and (P \or S) \and (\mathrm{F})$
+   
+   * One of the clauses is unsatisfiable, so return `False`.
 
 ### DPLL Algorithm Analysis
 
