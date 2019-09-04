@@ -35,6 +35,8 @@
 
 #### 2. Random assignment of all variables in the sentence
 
+* E.g. [GSAT](#GSAT)
+
 
 
 ### DPLL
@@ -80,4 +82,60 @@ Can we find an assignment of the values of the following sentences so that the o
 
 2. Let $S := (P \or Q) \and (P \or \neg Q \or R) \and (T \or \neg R) \and (\neg P \or \neg T) \and (P \or S) \and (T \or R \or S) \and (\neg S \or T)$
 
-   * 
+   * Exercise
+
+### DPLL Algorithm Analysis
+
+DPLL is:
+
+* Sound (the result is correct)
+* Complete (it always gives an answer)
+* Speed & memory consumption depends a lot on:
+  * Which symbol is being assigned first
+  * Which assignment is being followed first
+  * A lot of methods have been proposed
+
+
+
+### GSAT
+
+* `GSAT`$(\mathrm{Sentence} \, S)$
+
+  * Loop $n$ times
+
+    * Randomly choose assignment for all variables, say $A$
+
+    * Loop $m$ times
+
+      * Flip the variables that results in lowest cost
+
+        $\mathrm{Cost}(A) := $ #unsatisfied clauses
+
+        So, i.e. flip the variables that results in lowest number of unsatisfied clauses
+
+      * Return `True` if cost is $0$, i.e. there are no unsatisfied clauses.
+
+
+
+### GSAT Algorithm Analysis
+
+GSAT is:
+
+* Sound (the result is correct)
+* **Not** complete (it doesn't always give an answer)
+* Cannot be used to generate **all** satisfiable assignments.
+
+
+
+### DPLL vs. GSAT
+
+For a moment, GSAT performs much better than DPLL.
+
+Now,
+
+| Problem Type                                                 | DPLL             | GSAT             |
+| ------------------------------------------------------------ | ---------------- | ---------------- |
+| Weakly constrained problems (large proportion of the assignments is satisfiable) | :ok_hand:        | :ok_hand:        |
+| Highly constrained problems (very few satisfiable assignments, sometimes only 1) | :ok_hand:        | :nauseated_face: |
+| Problems in the middle                                       | :nauseated_face: | :nauseated_face: |
+
