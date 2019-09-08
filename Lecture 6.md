@@ -156,3 +156,58 @@ Now,
 | Highly constrained problems (very few satisfiable assignments, sometimes only 1) | :ok_hand:        | :nauseated_face: |
 | Problems in the middle                                       | :nauseated_face: | :nauseated_face: |
 
+
+
+---------
+
+## Uncertainty
+
+### Causes of uncertainty
+
+#### System noise & errors
+
+* Control error or disturbances from external forces
+  * Effect of performing an action is non-deterministric
+* Errors in sensing and in process of sensing data
+  * Imperfect observation about the world (partially observable)
+* Example: 
+  * a boat trying to navigate rough waters
+
+#### Too complex to model
+
+* Lazy, e.g. rolling a dice in a casino depends on wind direction from air conditioning, number of people around the table
+* Deliberate, to reduce computational complexity. We want to eliminate variables that will not affect the solution significantly.
+* Accidental error, e.g. lack of understanding of the problem
+
+
+
+#### Abstraction that may lead to modelling error
+
+* The actual possible states of often too large
+* Simplify, so it's solvable by current computing power
+* But, in general, simplification means clustering several actual states the same
+  * i.e. a state in our model corresponds to a set of similar states in the real problem
+* Similarly with action space
+* Usually bounded uncertainty
+
+
+
+### Making decisions
+
+* We want to find a plan that works regardless of what outcomes actually occur
+
+* Can no longer rely on a sequence of actions
+
+* Need a **conditional path**
+
+  * The action to perform depends on the output of the previous action
+
+    Need a different type of tree data structure.
+
+
+
+### AND-OR search tree
+
+* A tree with interleaving AND and OR levels
+* At each node of an OR level, branching is introduced by the agent's own choice
+* At each node of an AND level, branching is introduced by the environment
