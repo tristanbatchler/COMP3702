@@ -12,35 +12,35 @@ X O
 X    
 ```
 
-A rational agent is a ![6](https://latex.codecogs.com/gif.latex?6)-tuple ![%28A%2C%20P%2C%20S%2C%20T%2C%20Z%2C%20U%29](https://latex.codecogs.com/gif.latex?%28A%2C%20P%2C%20S%2C%20T%2C%20Z%2C%20U%29) where:
+A rational agent is a $6$-tuple $(A, P, S, T, Z, U)$ where:
 
-* ![A](https://latex.codecogs.com/gif.latex?A) is the action space
+* $A$ is the action space
 
   * In this case, let's say an action is to place the agent's symbol at an empty position on the board and then let the opponent play their turn.
   * Because the opponent plays a turn as part of each action, actions are **non-deterministic**.
 
-* ![P](https://latex.codecogs.com/gif.latex?P) is the percept space
+* $P$ is the percept space
 
   * In this case, let's say a perception is a view of the symbols on the board in the form of a string with characters representing symbols going left-to-right, top-to-bottom. Blank spaces would be represented by a special reserved character such as underscore.
     * E.g. the board depicted above would have perception OXOXO_X__
 
-* ![S](https://latex.codecogs.com/gif.latex?S) is the state space
+* $S$ is the state space
 
-  * In this case, because we have a **fully-observable system**, the state is always equal to its perception, so ![S%20%3D%20P](https://latex.codecogs.com/gif.latex?S%20%3D%20P).
+  * In this case, because we have a **fully-observable system**, the state is always equal to its perception, so $S = P$.
 
-* ![T%3AS%20%5Ctimes%20A%20%5Cto%20S](https://latex.codecogs.com/gif.latex?T%3AS%20%5Ctimes%20A%20%5Cto%20S) is the transition function
+* $T:S \times A \to S$ is the transition function
 
   * In this case, a transition from a board followed by an action would be the resulting board after the action has been performed.
-  * E.g. if ![s%20%5Cin%20S](https://latex.codecogs.com/gif.latex?s%20%5Cin%20S) is the current state, OXOXO_X__ and ![a%20%5Cin%20A](https://latex.codecogs.com/gif.latex?a%20%5Cin%20A) is the action to perform, putting an X at the end of the board, then ![T%28s%2C%20a%29](https://latex.codecogs.com/gif.latex?T%28s%2C%20a%29) might be OXOXO**O**X_**X**. Notice both he agent and the opponent took turns highlighted in bold.
-  * Because actions are non-deterministic, this transition function ![T](https://latex.codecogs.com/gif.latex?T) cannot be **well-defined**.
+  * E.g. if $s \in S$ is the current state, OXOXO_X__ and $a \in A$ is the action to perform, putting an X at the end of the board, then $T(s, a)$ might be OXOXO**O**X_**X**. Notice both he agent and the opponent took turns highlighted in bold.
+  * Because actions are non-deterministic, this transition function $T$ cannot be **well-defined**.
 
-* ![Z%3AS%20%5Cto%20P](https://latex.codecogs.com/gif.latex?Z%3AS%20%5Cto%20P) is the percept function
+* $Z:S \to P$ is the percept function
 
-  * In this case, because we have a fully-observable system, ![Z](https://latex.codecogs.com/gif.latex?Z) must be the identity mapping under ![S%20%3D%20P](https://latex.codecogs.com/gif.latex?S%20%3D%20P), i.e. ![Z%3DI_S](https://latex.codecogs.com/gif.latex?Z%3DI_S).
+  * In this case, because we have a fully-observable system, $Z$ must be the identity mapping under $S = P$, i.e. $Z=I_S$.
 
-* ![U%3AS%5Cto%20%5Cmathbb%7BR%7D](https://latex.codecogs.com/gif.latex?U%3AS%5Cto%20%5Cmathbb%7BR%7D) is the utility function
+* $U:S\to \mathbb{R}$ is the utility function
 
-  * We could choose many. One choice is to let ![U%28s%29%20%3D%201](https://latex.codecogs.com/gif.latex?U%28s%29%20%3D%201) if ![s](https://latex.codecogs.com/gif.latex?s) is a winning state and ![U%28s%29%20%3C%201](https://latex.codecogs.com/gif.latex?U%28s%29%20%3C%201) for all other states.
+  * We could choose many. One choice is to let $U(s) = 1$ if $s$ is a winning state and $U(s) < 1$ for all other states.
   * A more sensible and/or efficient choice may exist but we haven't got there yet in the course. All we're concerned about is the utility function giving a higher number for a better state.
 
   
@@ -57,9 +57,9 @@ A rational agent is a ![6](https://latex.codecogs.com/gif.latex?6)-tuple ![%28A%
 
 1. ***How will you design it?***
 
-   * ![A](https://latex.codecogs.com/gif.latex?A): an action will be for the current or goal location to change and for the agent to calculate and suggest a "best route" in the map from the current location to the goal location.
+   * $A$: an action will be for the current or goal location to change and for the agent to calculate and suggest a "best route" in the map from the current location to the goal location.
 
-   * ![P](https://latex.codecogs.com/gif.latex?P): a perception will be a weighted graph whose edges represent roads/paths in the map and whose nodes represent junctions in the map. The edges will be weighted with the distance along the path from each of its endpoints.
+   * $P$: a perception will be a weighted graph whose edges represent roads/paths in the map and whose nodes represent junctions in the map. The edges will be weighted with the distance along the path from each of its endpoints.
 
      ![Image result for weighted graph](https://ucarecdn.com/a67cb888-aa0c-424b-8c7f-847e38dd5691/)
 
@@ -67,13 +67,13 @@ A rational agent is a ![6](https://latex.codecogs.com/gif.latex?6)-tuple ![%28A%
 
      Finally, a perception will contain the current recommended/best route calculated by the agent.
 
-   * ![S](https://latex.codecogs.com/gif.latex?S) = ![P](https://latex.codecogs.com/gif.latex?P) in this fully-observable environment.
+   * $S$ = $P$ in this fully-observable environment.
 
-   * ![T%3AS%5Ctimes%20A%20%5Cto%20S](https://latex.codecogs.com/gif.latex?T%3AS%5Ctimes%20A%20%5Cto%20S): let ![s%20%5Cin%20S](https://latex.codecogs.com/gif.latex?s%20%5Cin%20S) be a current state and ![a%20%5Cin%20A](https://latex.codecogs.com/gif.latex?a%20%5Cin%20A) be a route to recommend. The result of ![T%28s%2C%20a%29](https://latex.codecogs.com/gif.latex?T%28s%2C%20a%29) will be a new state which has updated information about the current or goal locations and the new, re-calculated, recommended route.
+   * $T:S\times A \to S$: let $s \in S$ be a current state and $a \in A$ be a route to recommend. The result of $T(s, a)$ will be a new state which has updated information about the current or goal locations and the new, re-calculated, recommended route.
 
-   * ![Z%20%3D%20I_S](https://latex.codecogs.com/gif.latex?Z%20%3D%20I_S) in this fully-observable environment.
+   * $Z = I_S$ in this fully-observable environment.
 
-   * ![U%3A%20S%20%5Cto%20%5Cmathbb%7BR%7D](https://latex.codecogs.com/gif.latex?U%3A%20S%20%5Cto%20%5Cmathbb%7BR%7D), again, could be something like ![1](https://latex.codecogs.com/gif.latex?1) when the current location equals the goal location but that wouldn't be great.
+   * $U: S \to \mathbb{R}$, again, could be something like $1$ when the current location equals the goal location but that wouldn't be great.
 
      * Instead, we could use the negative sum of the weights in the graph along the recommended route. This would be more positive the closer the current location is to the goal. 
 
@@ -95,12 +95,12 @@ A rational agent is a ![6](https://latex.codecogs.com/gif.latex?6)-tuple ![%28A%
 ***A web crawler is a program that systematically browses and downloads web pagesfrom the Internet.  This is one of the programs that enables us to search the internet.Now, a web crawler can be viewed as a rational agent.  Please design the web crawleragent when the agent lives in:***
 
 1. ***An ideal world where no broken links exist and the internet connection always works.***
-   * ![A](https://latex.codecogs.com/gif.latex?A): an action is to visit a link and download the page's contents. The link would then be added to the history of links visited.
-   * ![P](https://latex.codecogs.com/gif.latex?P): a perception would be the contents of the current page and all of its links. A perception would also contain the history of links visited.
-   * ![S%20%3D%20P](https://latex.codecogs.com/gif.latex?S%20%3D%20P) in this fully-observable environment.
-   * ![T%3AS%20%5Ctimes%20A%20%5Cto%20S](https://latex.codecogs.com/gif.latex?T%3AS%20%5Ctimes%20A%20%5Cto%20S): let ![s%20%5Cin%20S](https://latex.codecogs.com/gif.latex?s%20%5Cin%20S) be the current page with its links and the current history. Let ![a%20%5Cin%20A](https://latex.codecogs.com/gif.latex?a%20%5Cin%20A) be the act of visiting a link on the current page and adding it to the history. Then ![T%28s%2C%20a%29](https://latex.codecogs.com/gif.latex?T%28s%2C%20a%29) would be the contents of the page visited and all its links and the history would contain this link as well.
-   * ![Z%20%3D%20I_S](https://latex.codecogs.com/gif.latex?Z%20%3D%20I_S) in this fully-observable environment.
-   * ![U%3AS%20%5Cto%20%5Cmathbb%7BR%7D](https://latex.codecogs.com/gif.latex?U%3AS%20%5Cto%20%5Cmathbb%7BR%7D) could be the number of unique links in the history.
+   * $A$: an action is to visit a link and download the page's contents. The link would then be added to the history of links visited.
+   * $P$: a perception would be the contents of the current page and all of its links. A perception would also contain the history of links visited.
+   * $S = P$ in this fully-observable environment.
+   * $T:S \times A \to S$: let $s \in S$ be the current page with its links and the current history. Let $a \in A$ be the act of visiting a link on the current page and adding it to the history. Then $T(s, a)$ would be the contents of the page visited and all its links and the history would contain this link as well.
+   * $Z = I_S$ in this fully-observable environment.
+   * $U:S \to \mathbb{R}$ could be the number of unique links in the history.
 2. ***The real world, where both assumptions above are not valid.***
    * We won't know if a page exists before choosing its link to visit, so our system would be non-deterministic in this world.
      * As a result, our transition function is no longer well-defined.
