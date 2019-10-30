@@ -19,7 +19,7 @@
 
 **A: **
 
-**Q: **Descibe the difference between observable and partially observable.
+**Q: **Describe the difference between observable and partially observable.
 
 **A: **
 
@@ -84,7 +84,7 @@
   * Mark $t$ as "explored"
   * If $t$ holds the goal state, return success
   * For each node $v$ that is a successor of $t$
-    * If $v$ is not yet "explorered" or in the stack:
+    * If $v$ is not yet "explored" or in the stack:
       * Put $v$ on the stack
 
 
@@ -160,31 +160,33 @@
 
 
 
-**Q:**
+**Q:** What is the difference between UCS and A* search?
 
 **A:**
 
 
 
-**Q:**
+**Q:** What is the difference between A* Greedy Best First search?
 
 **A:**
 
 
 
-**Q:**
+**Q:** What is the definition of an **admissible** heuristic?
 
-**A:**
-
-
-
-**Q:**
-
-**A:**
+**A:** A heuristic is admissible if it never overestimates the cost.
 
 
 
-**Q:**
+**Q:** What is the definition of a **consistent** heuristic?
+
+**A:** The estimated cost of moving from node $A$ to $C$ is never more than the true cost of moving from $A$ to $B$ plus the estimated cost of moving from $B$ to $C$. In other words:
+$$
+h(AB) \leq c(AB) + h(BC)
+$$
+
+
+**Q: **
 
 **A:**
 
@@ -229,7 +231,7 @@ It is denoted $A \models B$.
 
 | $A$                 | $B$                         | Name                                |
 | ------------------- | --------------------------- | ----------------------------------- |
-| $a \and b$          | $b \and a$                  | Commuativity of $\and$              |
+| $a \and b$          | $b \and a$                  | Commutativity of $\and$             |
 | $a \or b$           | $b \or a$                   | Commutativity of $\or$              |
 | $(a \and b) \and c$ | $a \and (b \and c)$         | Associativity of $\and$             |
 | $(a \or b) \or c$   | $a \or (b \or c)$           | Associativity of $\or$              |
