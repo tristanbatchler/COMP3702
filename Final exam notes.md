@@ -2,6 +2,18 @@
 
 * Past exams: http://robotics.itee.uq.edu.au/~ai/doku.php/wiki/resources
 * Tutorials: https://learn.uq.edu.au/webapps/blackboard/content/listContent.jsp?course_id=_124076_1&content_id=_4679265_1
+* I should make sure to practice DPLL **lots** (see UQ theme park question from tutorial 6)
+
+### Known facts
+
+* There **will** be a question on logic rules including De Morgan's laws and conversion to CNF.
+* There **will** be a question on decision theory including Bayes' rule.
+* There will be **no** continuous search or motion planning questions! :grin:
+* There is **no** need to memorise the DPLL algorithm -- only need to know how to use it.
+* The exam has a total of 120 marks over 6 questions.
+* The exam will have a total time of 120 minutes.
+* The exam is closed book.
+* The exam will be fairly similar to other previous exams. :grin:
 
 
 
@@ -56,7 +68,7 @@
     * If $v$ is not "explored" or in the queue:
       * Insert $v$ into the queue
 
-**Q: ** Describe the computational complexity of BFS.
+**Q: ** Describe the space and time complexity of BFS.
 
 **A: **
 
@@ -89,7 +101,7 @@
 
 
 
-**Q: ** Describe the computational complexity of DFS.
+**Q: ** Describe the space and time complexity of DFS.
 
 **A: **
 
@@ -111,7 +123,7 @@
 
 
 
-**Q: ** Describe the computational complexity of IDDFS.
+**Q: ** Describe the space and time complexity of IDDFS.
 
 **A: **
 
@@ -144,7 +156,7 @@
 
 
 
-**Q: ** Describe the computational complexity of UCS.
+**Q: ** Describe the space and time complexity of UCS.
 
 **A: **
 
@@ -180,10 +192,15 @@
 
 **Q:** What is the definition of a **consistent** heuristic?
 
-**A:** The estimated cost of moving from node $A$ to $C$ is never more than the true cost of moving from $A$ to $B$ plus the estimated cost of moving from $B$ to $C$. In other words:
+**A:** The estimated cost of moving from node $A$ to the goal is never more than the true cost of moving from $A$ to $B$ plus the estimated cost of moving from $B$ to the goal. In other words:
 $$
-h(AB) \leq c(AB) + h(BC)
+h(A) \leq c(\overline{AB}) + h(B)
 $$
+
+**Q: **What is the implication between admissibility and consistency of a heuristic?
+
+**A: **Consistency implies admissibility but the converse is not true.
+
 
 
 **Q: **
@@ -192,31 +209,33 @@ $$
 
 
 
-**Q:**
-
-**A:**
-
-
-
 ### Logic
 
-**Q: ** What does it mean for an FOL sentence to be **valid**?
+**Q: ** What does it mean for a sentence to be **valid**?
 
-**A: ** 
+**A: **The sentence is true for all possible interpretations. Also acceptable: the sentence is a logical tautology.
 
-**Q: ** What does it mean for an FOL sentence to be **satisfiable**?
 
-**A: ** 
 
-**Q: ** What does it mean for an FOL sentence to be **unsatisfiable**?
+**Q: ** What does it mean for a sentence to be **satisfiable**?
 
-**A: ** 
+**A: ** The sentence is true for at least one interpretation.
 
-**Q: ** What is the model of an FOL sentence?
 
-**A: ** 
 
-**Q: **What does it mean for an FOL sentence $A$ to **entail** another sentence $B$? How is it denoted?
+**Q: ** What does it mean for a sentence to be **unsatisfiable**?
+
+**A: ** The sentence is false for all possible interpretations. Also acceptable: the sentence is a logical contradiction.
+
+
+
+**Q: ** What is the model of a sentence?
+
+**A: ** An interpretation that makes the sentence true.
+
+
+
+**Q: **What does it mean for a sentence $A$ to **entail** another sentence $B$? How is it denoted?
 
 **A: **Either is acceptable:
 
@@ -224,6 +243,20 @@ $$
 * $A \to B$ is valid/always true.
 
 It is denoted $A \models B$.
+
+
+
+**Q: **What does it mean for an algorithm to be sound?
+
+**A: **If it produces a result, the result is correct.
+
+
+
+**Q: **What does it mean for an algorithm to be complete?
+
+**A: **It will always produce a result.
+
+
 
 **Q: ** List all logical equivalence laws and their definitions.
 
@@ -244,25 +277,175 @@ It is denoted $A \models B$.
 | $a \and (b \or c)$  | $(a \and b) \or (a \and c)$ | Distributivity of $\and$ over $\or$ |
 | $a \or (b \and c)$  | $(a \or b) \and (a \or c)$  | Distributivity of $\or$ over $\and$ |
 
-**Q: ** What is modus ponens?
+**Q: ** What is modus ponens? What does it translate to? What is your favourite example? How is it written with atoms $a$ and $b$?
 
 **A: ** 
 
-**Q: ** What is modus tollens?
+* Suppose $a$ implies $b$ and $a$ is true. Then $b$ must be true. 
+
+* Mode that affirms. 
+
+* The sky is blue implies the water is blue. The sky is blue. Therefore the water is blue.
+
+* $$
+  a \to b\\ a\\\rule{2cm}{0.4pt}\\ a
+  $$
+
+
+
+**Q: ** What is modus tollens? What does it translate to? What is your favourite example?
 
 **A: ** 
 
-**Q: ** What is and-elimination?
+* Suppose $a$ implies $b$ and $b$ is false. Then $a$ must also be false. 
+
+* Mode that denies. 
+
+* The sky is blue implies the water is blue. The water is red. Therefore the sky cannot be blue.
+
+* $$
+  a \to b \\\ \neg b \\ \rule{2cm}{0.4pt}\\\neg a
+  $$
+
+
+
+**Q: ** What is conjunction elimination? How is it written with atoms $a$ and $b$?
 
 **A: ** 
 
-**Q: ** Describe the steps to convert an FOL statement to conjunctive normal form
+* Suppose $a$ and $b$ is true. Then $a$ is true.
 
-**A: ** 
+* $$
+  a \and b\\
+  \rule{2cm}{0.4pt}\\
+  a
+  $$
+
+
+
+**Q: **How resolution is it written with atoms $a$, $b$, and $c$?
+
+**A: **
+$$
+a \or b\\
+\neg a \or c\\
+\rule{2cm}{0.4pt}\\
+b \or c
+$$
+
+
+
+
+**Q: **What is model checking?
+
+**A: **A way of determining whether a sentence is true for all possible interpretations.
+
+
+
+**Q:** Was is the simplest approach to model checking?
+
+**A: **Enumerate the models, i.e. all true/false combinations for the sentence and checking if the sentence is true in each case.
+
+
+
+**Q: **What is a better approeach to model checking? How does it work?
+
+**A: **Theorem proving. Use logical equivalence laws and inference rules to make legal steps from the initial statement to the goal statement.
+
+
+
+**Q: **What is a logical atom?
+
+**A: **A single symbol with no logical connectives.
+
+
+
+**Q: **What is a logical literal?
+
+**A: **An atom or the negation of an atom.
+
+
+
+**Q: **What is a logical clause?
+
+**A: **A disjunction of literals.
+
+
+
+**Q: **What does it mean to convert a sentence to conjunctive normal form?
+
+**A: **We convert the sentence into a (either of these is acceptable):
+
+* conjunction of disjunctions of atoms or the negation of atoms
+* conjunction of disjunctions of literals
+* conjunction of clauses
+
+
+
+**Q: **What are the only logical connectives in a sentence that is in CNF?
+
+**A:** **And** ($\and$), **or** ($\or$), and **not** ($\neg$).
+
+
+
+**Q: **Describe the steps to convert a sentence to CNF.
+
+**A:** 
+
+1. Eliminate arrows using definitions
+2. Drive in negations using De Morgan's laws
+3. Distribute **or** ($\or$) over **and** ($\and$)
+
+
 
 **Q: ** Describe the steps to the resolution refutation algorithm
 
 **A: **
+
+1. Convert all sentences to CNF
+2. Negate the desired conclusion
+3. Keep applying resoluton until a contradiction arises
+
+
+
+**Q: **What is a satisfiability problem or a constraint satisfaction problem?
+
+**A: **A question of assigning values to each variable in a problem such that all the constraints are satisfied.
+
+
+
+**Q: **Is the Davis-Putnam-Logeman-Loveland algorithm sound and complete?
+
+**A: ** Yes to both.
+
+
+
+**Q: **Alternative to DPLL, name another method to solve satisfiability problems? Describe its steps. Is it sound and complete?
+
+**A: **GSAT.
+
+* Loop $n$ times:
+  * Randomly an assignment for all variables
+  * Loop $m$ times:
+    * Flip the variable that results in the lowest number of unsatisfied clauses
+    * If there are no unsatisfied clauses, return the assignment chosen
+
+It is sound but not complete.
+
+
+
+**Q: **What is a unit clause?
+
+**A: **A clause that consists of only one unassigned literal.
+
+
+
+**Q: **What is a pure variable within a sentence?
+
+**A: **A variable which appears in the sentence as (either of these is acceptable):
+
+* only ever positive or only ever negative
+* always atomic or always negated
 
 
 
