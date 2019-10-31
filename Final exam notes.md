@@ -451,9 +451,100 @@ It is sound but not complete.
 
 ### Decision theory
 
-**Q: **What is Bayes' rule?
+**Q: **What does the branching at each interleaving level of an AND-OR tree represent?
+
+**A: **Branching at an AND level represents the agent's choices of action while branching at an OR level represents actions taken by the environment.
+
+
+
+**Q: **What are the two types of nodes in an AND-OR tree? What level are these types found at?
+
+**A: **
+
+* State node found at each OR level
+* Action node found at each AND level
+
+
+
+**Q: **Describe the steps required to find a solution to an AND-OR tree.
+
+**A: **
+
+* Mark all the leaf nodes as "solved" if their state is a goal state
+
+* Working up the tree:
+  * label action nodes as "solved" if **all** its children are "solved"
+  * label state nodes as "solved" if **at least one of** its children is "solved"
+* If you reach the root, the solution is the sub-tree from the root where all nodes are "solved"
+
+
+
+**Q: **What does the branching at each interleaving level of a minimax tree represent?
+
+**A: **Branching at a MAX level represents the agent's choices of action while branching at a MIN level represents actions taken by the opponent.
+
+
+
+**Q: **What is the thing each player of a minimax game are trying to minimise or maximise? What does it represent?
+
+**A: **An evaluation function (also acceptable: a heuristic). Represents an estimate as to how favourable a game state is for the agent.
+
+
+
+**Q: **Describe the steps of the minimax algorithm.
+
+**A: **
+
+* Compute the evaluation function at every leaf of the tree
+
+* Working up the tree:
+  * label MAX nodes as the maximum evaluation of its immediate children (i.e. successors)
+  * label MIN nodes as the minimum evaluation of its immediate children
+
+
+
+
+**Q: **
 
 **A: **
 
 
 
+
+**Q: **
+
+**A: **
+
+
+
+
+**Q: **
+
+**A: **
+
+
+
+
+**Q: **
+
+**A: **
+
+
+
+
+**Q: **
+
+**A: **
+
+
+
+
+**Q: **
+
+**A: **
+
+
+
+**Q: **What is Bayes' rule?
+
+**A: **
