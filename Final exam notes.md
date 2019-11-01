@@ -8,8 +8,11 @@
 
 * There **will** be a question on logic rules including De Morgan's laws and conversion to CNF.
 * There **will** be a question on decision theory including Bayes' rule.
+* There will **most likely** be a question on expected value of sampling information using Bayes' rule akin to tutorial 7 questions. Make sure you master tutorial 7.
+* There will **most likely** be a question on using offline solvers with MDPs.
 * There will be **no** continuous search or motion planning questions! :grin:
 * There is **no** need to memorise the DPLL algorithm -- only need to know how to use it.
+* There is **no** need to study the utility of money.
 * The exam has a total of 120 marks over 6 questions.
 * The exam will have a total time of 120 minutes.
 * The exam is closed book.
@@ -503,6 +506,70 @@ It is sound but not complete.
 
 
 
+**Q: **Desribe the steps of the alpha-beta pruning algorithm.
+
+**A: **
+
+* Maintain an upper and lower bound of the evaluation function at each node.
+* Let $\alpha$ be the best already explored option along the path to the root for the **maximiser**
+* Let $\beta$ be the best already explored option along the path to the root for the **minimiser**
+* Explore the game tree to depth $h$ in a depth-first manner
+* Back up $\alpha$ and $\beta$ values wherever possible
+* Prune branches that can't lead to changing the final decision
+
+
+
+**Q: **What kind of environment is decision theory useful in?
+
+**A: **A non-deterministic one.
+
+
+
+**Q: **What are the components of a decision theory problem?
+
+**A: **
+
+* A set of **states** (also acceptable: **outcomes**)
+* **Preference**: which state/outcome is preferred. Also acceptable: a **utility function**.
+* **Lotteries**: a set of states/possible outcomes with their probability of occurring 
+
+
+
+**Q: **What is the formula for the expected utility given a decision theory problem with states $A$, $B$, and $C$?
+
+**A: **(Probability of $A$ occurring) $\times$ (utility of $A$) $+$ (probability of $B$ occurring) $\times$ (utility of $B$) $+$ (probability of $C$ occurring) $\times$ (utility of $C$), i.e.
+$$
+P(A) \cdot U(A) + P(B) \cdot U(B) + P(C) \cdot U(C)
+$$
+
+
+**Q: **How can we solve problems using the maximum expected utility?
+
+**A: **Calculate the expected utility for each decision outcome. Make the decision that results in the highest expected utility (also acceptable: make the decision whose outcome maximises the expected utility).
+
+
+
+**Q: **What does the branching at each interleaving level of a decision tree represent?
+
+**A: **Branching at a **choice** level represents the agent's decisions while branching at a **chance** level represents the lottery that corresponds to the outcome of the decision made at its parent's node.
+
+
+
+**Q: **What is Bayes' rule in a problem with outcomes $A$ and $B$?
+
+**A: **
+$$
+P(B \mid A) = \frac{P(A \mid B) \cdot P(B)}{P(A)}
+$$
+
+
+
+
+**Q: **When should Bayes' rule be applied in a problem with outcomes $A$ and $B$?
+
+**A: **When it is easier to know the probability of $A$ given $B$ rather than $B$ given $A$ (or vice-versa).
+
+
 
 **Q: **
 
@@ -510,18 +577,9 @@ It is sound but not complete.
 
 
 
-
 **Q: **
 
 **A: **
-
-
-
-
-**Q: **
-
-**A: **
-
 
 
 
@@ -531,6 +589,11 @@ It is sound but not complete.
 
 
 
+**Q: **
+
+**A: **
+
+
 
 **Q: **
 
@@ -538,6 +601,11 @@ It is sound but not complete.
 
 
 
+**Q: **
+
+**A: **
+
+
 
 **Q: **
 
@@ -545,6 +613,49 @@ It is sound but not complete.
 
 
 
-**Q: **What is Bayes' rule?
+**Q: **
 
 **A: **
+
+
+
+**Q: **
+
+**A: **
+
+
+
+**Q: **
+
+**A: **
+
+
+
+**Q: **
+
+**A: **
+
+
+
+**Q: **
+
+**A: **
+
+
+
+**Q: **
+
+**A: **
+
+
+
+**Q: **
+
+**A: **
+
+
+
+**Q: **
+
+**A: **
+
