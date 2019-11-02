@@ -9,10 +9,11 @@
 * There **will** be a question on logic rules including De Morgan's laws and conversion to CNF.
 * There **will** be a question on decision theory including Bayes' rule.
 * There will **most likely** be a question on expected value of sampling information using Bayes' rule akin to tutorial 7 questions. Make sure you master tutorial 7.
-* There will **most likely** be a question on using offline solvers with MDPs.
+* There will **most likely** be a question on using offline solvers with MDPs (i.e. value & policy iteration).
 * There will be **no** continuous search or motion planning questions! :grin:
 * There is **no** need to memorise the DPLL algorithm -- only need to know how to use it.
 * There is **no** need to study the utility of money.
+* There is **no** need to learn how to compute solutions to MDPs **online** (i.e. RTDP or monte-carlo tree search)
 * The exam has a total of 120 marks over 6 questions.
 * The exam will have a total time of 120 minutes.
 * The exam is closed book.
@@ -571,49 +572,79 @@ $$
 
 
 
-**Q: **
+**Q: **MDPs model a problem where the non-determinism is what's known as **1st order Markovian**. What does that mean? And how would you represent that in probability notation?
+
+**A: **The future state is only dependant on the current state and the action and does not take into account all the previous/past states.
+$$
+P(s_{t+1} \mid s_t, a_t) = P(s_{t+1} \mid s_t, a_t, s_{t-1}, a_{t-1}, \cdots s_1, a_1, s_0)
+$$
+
+
+
+
+**Q: **How do we define an MDP problem and how are the componented denoted?
 
 **A: **
 
-
-
-**Q: **
-
-**A: **
-
-
-
-**Q: **
-
-**A: **
+* State space, $S$
+* Action space, $A$
+* Transition function, $T: S \times A \times S \to [0, 1] \sub \mathbb{R}$
+* Reward function, $R: S \to \mathbb{R}$
+  Also acceptable: $R: S \times A \to \mathbb{R}$
+  Also acceptable: $R : S \times A \times S \to \mathbb{R}$
 
 
 
-**Q: **
+**Q: **What is the relationship between a transition function and the probability distribution in an MDP problem?
 
-**A: **
-
-
-
-**Q: **
-
-**A: **
+**A: **$T(s, a, s') = P(s' \mid s, a)$. Also acceptable: the probability of transitioning to state $s'$ from state $s$ via action $a$.
 
 
 
-**Q: **
+**Q: **Define the solution of an MDP problem and what it represents.
 
-**A: **
+**A: **An **optimal policy** $\pi^*:S \to A$ which represents a strategy of choosing actions in states that will reap the greatest long-term reward when executed.
 
 
 
-**Q: **
+**Q: **In an infinite horizon MDP solver, what is the role of the discount factor? How is it denoted and what is its range?
+
+**A: **The discount factor determines how much the agent values immediate reward versus long-term reward. Smaller discount equates to a more greedy agent. It is denoted $\gamma$ (gamma) and is in the range $[0, 1]$.
+
+
+
+**Q: **What is the Bellman equation for calculating the value of a state assuming the reward function is only dependant on the **current state**?
 
 **A: **
+$$
+V(s) = R(s) + \max_{a \in A}{\left( \gamma \sum_{s' \in S} T(s, a, s') \cdot V(s') \right)}
+$$
 
 
 
-**Q: **
+**Q: **What is the Bellman equation for calculating the value of a state assuming the reward function is only dependant on the **current state and the action**?
+
+**A: **
+$$
+V(s) = \max_{a \in A}{\left( R(s, a) + \gamma \sum_{s' \in S} T(s, a, s') \cdot V(s') \right)}
+$$
+
+
+
+**Q: **What is the Bellman equation for calculating the value of a state assuming the reward function is  dependant on the **current state, the action, and the next state**?
+
+**A: **
+$$
+V(s) = \max_{a \in A}{\left( \sum_{s' \in S}{T(s, a, s') \left(R(s, a, s') + \gamma \cdot V(s') \right)} \right)}
+$$
+
+**Q: **What is the difference between calculating the value and calculating the best action for a policy?
+
+**A: **Instead of $\max$ use $\mathop{\mathrm{argmax}}$ in the calculation to return the best action.
+
+
+
+**Q: **Describe the steps of the value iteration algorithm.
 
 **A: **
 
