@@ -14,6 +14,7 @@
 * There is **no** need to memorise the DPLL algorithm -- only need to know how to use it.
 * There is **no** need to study the utility of money.
 * There is **no** need to learn how to compute solutions to MDPs **online** (i.e. RTDP or monte-carlo tree search)
+* **There is no need to learn reinforcement learning! :grin:**
 * The exam has a total of 120 marks over 6 questions.
 * The exam will have a total time of 120 minutes.
 * The exam is closed book.
@@ -72,11 +73,11 @@
     * If $v$ is not "explored" or in the queue:
       * Insert $v$ into the queue
 
-**Q: ** Describe the space and time complexity of BFS.
+**Q: **Describe the space and time complexity of BFS.
 
 **A: **
 
-**Q: ** Is BFS complete? Is it optimal?.
+**Q: **Is BFS complete? Is it optimal?.
 
 **A: **
 
@@ -268,18 +269,18 @@ It is denoted $A \models B$.
 
 | $A$                 | $B$                         | Name                                |
 | ------------------- | --------------------------- | ----------------------------------- |
-| $a \and b$          | $b \and a$                  | Commutativity of $\and$             |
-| $a \or b$           | $b \or a$                   | Commutativity of $\or$              |
-| $(a \and b) \and c$ | $a \and (b \and c)$         | Associativity of $\and$             |
-| $(a \or b) \or c$   | $a \or (b \or c)$           | Associativity of $\or$              |
+| $a \land b$          | $b \land a$                  | Commutativity of $\land$             |
+| $a \lor b$           | $b \lor a$                   | Commutativity of $\lor$              |
+| $(a \land b) \land c$ | $a \land (b \land c)$         | Associativity of $\land$             |
+| $(a \lor b) \lor c$   | $a \lor (b \lor c)$           | Associativity of $\lor$              |
 | $\neg(\neg a)$      | $a$                         | Double-negation elimination         |
 | $a \to b$           | $\neg b \to \neg a$         | Contrapositive                      |
-| $a \to b$           | $\neg a \or b$              | Implication elimination             |
-| $a \lrarr b$        | $(a \to b) \and (b \to a)$  | Biconditional elimination           |
-| $\neg(a \and b)$    | $\neg a \or \neg b$         | De Morgan's law                     |
-| $\neg (a \or b)$    | $\neg a \and \neg b$        | De Morgan's law                     |
-| $a \and (b \or c)$  | $(a \and b) \or (a \and c)$ | Distributivity of $\and$ over $\or$ |
-| $a \or (b \and c)$  | $(a \or b) \and (a \or c)$  | Distributivity of $\or$ over $\and$ |
+| $a \to b$           | $\neg a \lor b$              | Implication elimination             |
+| $a \lrarr b$        | $(a \to b) \land (b \to a)$  | Biconditional elimination           |
+| $\neg(a \land b)$    | $\neg a \lor \neg b$         | De Morgan's law                     |
+| $\neg (a \lor b)$    | $\neg a \land \neg b$        | De Morgan's law                     |
+| $a \land (b \lor c)$  | $(a \land b) \lor (a \land c)$ | Distributivity of $\land$ over $\lor$ |
+| $a \lor (b \land c)$  | $(a \lor b) \land (a \lor c)$  | Distributivity of $\lor$ over $\land$ |
 
 **Q: ** What is modus ponens? What does it translate to? What is your favourite example? How is it written with atoms $a$ and $b$?
 
@@ -320,7 +321,7 @@ It is denoted $A \models B$.
 * Suppose $a$ and $b$ is true. Then $a$ is true.
 
 * $$
-  a \and b\\
+  a \land b\\
   \rule{2cm}{0.4pt}\\
   a
   $$
@@ -331,10 +332,10 @@ It is denoted $A \models B$.
 
 **A: **
 $$
-a \or b\\
-\neg a \or c\\
+a \lor b\\
+\neg a \lor c\\
 \rule{2cm}{0.4pt}\\
-b \or c
+b \lor c
 $$
 
 
@@ -388,7 +389,7 @@ $$
 
 **Q: **What are the only logical connectives in a sentence that is in CNF?
 
-**A:** **And** ($\and$), **or** ($\or$), and **not** ($\neg$).
+**A:** **And** ($\land$), **or** ($\lor$), and **not** ($\neg$).
 
 
 
@@ -398,7 +399,7 @@ $$
 
 1. Eliminate arrows using definitions
 2. Drive in negations using De Morgan's laws
-3. Distribute **or** ($\or$) over **and** ($\and$)
+3. Distribute **or** ($\lor$) over **and** ($\land$)
 
 
 
@@ -507,7 +508,7 @@ It is sound but not complete.
 
 
 
-**Q: **Desribe the steps of the alpha-beta pruning algorithm.
+**Q: **Describe the steps of the alpha-beta pruning algorithm.
 
 **A: **
 
@@ -574,15 +575,14 @@ $$
 
 **Q: **MDPs model a problem where the non-determinism is what's known as **1st order Markovian**. What does that mean? And how would you represent that in probability notation?
 
-**A: **The future state is only dependant on the current state and the action and does not take into account all the previous/past states.
+**A: **The future state is only dependent on the current state and the action and does not take into account all the previous/past states.
 $$
 P(s_{t+1} \mid s_t, a_t) = P(s_{t+1} \mid s_t, a_t, s_{t-1}, a_{t-1}, \cdots s_1, a_1, s_0)
 $$
 
 
 
-
-**Q: **How do we define an MDP problem and how are the componented denoted?
+**Q: **How do we define an MDP problem and how are the components denoted?
 
 **A: **
 
@@ -613,7 +613,7 @@ $$
 
 
 
-**Q: **What is the Bellman equation for calculating the value of a state assuming the reward function is only dependant on the **current state**?
+**Q: **What is the Bellman equation for calculating the value of a state assuming the reward function is only dependent on the **current state**?
 
 **A: **
 $$
@@ -622,7 +622,7 @@ $$
 
 
 
-**Q: **What is the Bellman equation for calculating the value of a state assuming the reward function is only dependant on the **current state and the action**?
+**Q: **What is the Bellman equation for calculating the value of a state assuming the reward function is only dependent on the **current state and the action**?
 
 **A: **
 $$
@@ -631,7 +631,7 @@ $$
 
 
 
-**Q: **What is the Bellman equation for calculating the value of a state assuming the reward function is  dependant on the **current state, the action, and the next state**?
+**Q: **What is the Bellman equation for calculating the value of a state assuming the reward function is  dependent on the **current state, the action, and the next state**?
 
 **A: **
 $$
@@ -648,45 +648,20 @@ $$
 
 **A: **
 
+* Initialise $V(s) := R(s)$ for all $s \in S$.
+* Loop until $V(s)$ converges:
+  * For all $s \in S$:
+    * Update $V(s)$ with Bellman update
 
-
-**Q: **
-
-**A: **
-
-
-
-**Q: **
+**Q: **How do we define an POMDP problem and how are the components denoted?
 
 **A: **
 
-
-
-**Q: **
-
-**A: **
-
-
-
-**Q: **
-
-**A: **
-
-
-
-**Q: **
-
-**A: **
-
-
-
-**Q: **
-
-**A: **
-
-
-
-**Q: **
-
-**A: **
-
+- State space, $S$
+- Action space, $A$
+- Observation space, $O$
+- Transition function, $T: S \times A \times S \to [0, 1] \sub \mathbb{R}$
+- Observation function $Z : S \to O$
+- Reward function, $R: S \to \mathbb{R}$
+  Also acceptable: $R: S \times A \to \mathbb{R}$
+  Also acceptable: $R : S \times A \times S \to \mathbb{R}$
