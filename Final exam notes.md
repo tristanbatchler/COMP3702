@@ -228,6 +228,12 @@ $$
 
 
 
+**Q: **What is the implication between optimality of A* and its heuristic?
+
+**A: **Admissibility of the heurictic implies optimality of A* but the converse is not true.
+
+
+
 ### Logic
 
 **Q: ** What does it mean for a sentence to be **valid**?
