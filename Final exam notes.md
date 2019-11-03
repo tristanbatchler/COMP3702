@@ -56,6 +56,8 @@ Partially observable: the percept space is different to the state space.
 **A: **Static: the environment does not change between the agent's actions.
 Dynamic: the environment can change between the agent's actions.
 
+
+
 ### Blind search
 
 **Q:** What is the definition of blind search?
@@ -91,9 +93,16 @@ Dynamic: the environment can change between the agent's actions.
 
 **A: **
 
-**Q: **Is BFS complete? Is it optimal?.
+* Time: $O(b^d)$ where 
+  * $b$ is the branching factor and 
+  * $d$ is the depth of the shallowest goal node
+* Space: also $O(b^d)$
 
-**A: **
+
+
+**Q: **Is BFS complete? Is it optimal?
+
+**A: **Complete if the branching factor is finite. Optimal.
 
 
 
@@ -107,17 +116,22 @@ Dynamic: the environment can change between the agent's actions.
 
 **A: **
 
+- Time: $O(b^m)$ where 
+  - $b$ is the branching factor and 
+  - $m$ is the maximum depth
+- Space: $O(bm)$. Also acceptable: $O(m)$
 
 
-**Q: ** Is DFS complete? Is it optimal?.
 
-**A: **
+**Q: ** Is DFS complete? Is it optimal?
+
+**A: **Complete if the branching factor is finite and there are no loops. Not optimal.
 
 
 
-**Q:** What kind of container does iterative deepening depth first search use? How are nodes in the container removed?
+**Q:** Describe the general process for iterative deepening depth first search.
 
-**A:** 
+**A:** Repeatedly run DFS on deeper and deeper subtrees until the solution is found.
 
 
 
@@ -125,11 +139,16 @@ Dynamic: the environment can change between the agent's actions.
 
 **A: **
 
+- Time: $O(b^d)$ where 
+  - $b$ is the branching factor and 
+  - $d$ is the depth of shallowest goal node
+- Space: $O(bd)$
 
 
-**Q: ** Is IDDFS complete? Is it optimal?.
 
-**A: **
+**Q: ** Is IDDFS complete? Is it optimal?
+
+**A: **Complete if the branching factor is finite. Optimal.
 
 
 
@@ -139,15 +158,31 @@ Dynamic: the environment can change between the agent's actions.
 
 
 
+**Q: **What priority does each node get in UCS?
+
+**A: **The number of steps away it is from the initial node.
+
+
+
 **Q: ** Describe the space and time complexity of UCS.
 
 **A: **
+
+Time and space: 
+$$
+O\left( b^{1 + \mathop{\mathrm{floor}}( C^* / \epsilon )} \right)​
+$$
+where 
+
+- $b$ is the branching factor,
+- $C^*$ is the cost of the optimal solution,
+- $\epsilon$ is the minimum cost of a step
 
 
 
 **Q: ** Is UCS complete? Is it optimal?.
 
-**A: **
+**A: **Complete if the branching factor is finite and all edges have a positive cost. Optimal if all edges have a positive cost.
 
 
 
@@ -159,15 +194,18 @@ Dynamic: the environment can change between the agent's actions.
 
 
 
-**Q:** What is the difference between UCS and A* search?
+**Q:** What is the difference between UCS and Greedy Best First search?
 
-**A:**
+**A: **The priority of a node is the value of the heuristic function at that node.
+Also acceptable: the cost from the initial node is ignored.
+Also acceptable: the priority of a node $n$ is $h(n)$.
 
 
 
-**Q:** What is the difference between A* Greedy Best First search?
+**Q:** What is the difference between Greedy Best First search and A*?
 
-**A:**
+**A: **The priority of a node is the sum of the cost from the initial node plus the estimated cost to the goal node.
+Also acceptable: the priority of a node $n$ is $g(n) + h(n)$.
 
 
 
@@ -258,6 +296,8 @@ It is denoted $A \models B$.
 | $a \land (b \lor c)$  | $(a \land b) \lor (a \land c)$ | Distributivity of $\land$ over $\lor$ |
 | $a \lor (b \land c)$  | $(a \lor b) \land (a \lor c)$  | Distributivity of $\lor$ over $\land$ |
 
+
+
 **Q: ** What is modus ponens? What does it translate to? What is your favourite example? How is it written with atoms $a$ and $b$?
 
 **A: ** 
@@ -329,7 +369,7 @@ $$
 
 
 
-**Q: **What is a better approeach to model checking? How does it work?
+**Q: **What is a better approach to model checking? How does it work?
 
 **A: **Theorem proving. Use logical equivalence laws and inference rules to make legal steps from the initial statement to the goal statement.
 
@@ -385,7 +425,7 @@ $$
 
 1. Convert all sentences to CNF
 2. Negate the desired conclusion
-3. Keep applying resoluton until a contradiction arises
+3. Keep applying resolution until a contradiction arises
 
 
 
@@ -521,6 +561,7 @@ P(A) \cdot U(A) + P(B) \cdot U(B) + P(C) \cdot U(C)
 $$
 
 
+
 **Q: **How can we solve problems using the maximum expected utility?
 
 **A: **Calculate the expected utility for each decision outcome. Make the decision that results in the highest expected utility (also acceptable: make the decision whose outcome maximises the expected utility).
@@ -539,7 +580,6 @@ $$
 $$
 P(B \mid A) = \frac{P(A \mid B) \cdot P(B)}{P(A)}
 $$
-
 
 
 
