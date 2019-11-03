@@ -28,21 +28,33 @@
 
 **A:**
 
-**Q: **Describe the difference between discrete and continuous.
+* State space, $S$
+* Action space, $A$
+* Percept space, $P$
+* Transition function, $T: S \times A \to S$
+* Percept function, $Z: P \to S$
+* Utility function, $U : S \to \mathbb{R}$
 
-**A: **
+
 
 **Q: **Describe the difference between deterministic and non-deterministic.
 
-**A: **
+**A: **Deterministic: the transition function is well-defined. 
+Non-deterministic: the transition function is ill-defined or does not exist.
 
-**Q: **Describe the difference between observable and partially observable.
 
-**A: **
+
+**Q: **Describe the difference between fully observable and partially observable.
+
+**A: **Fully observable: the percept space equals the state space ($P = S$).
+Partially observable: the percept space is different to the state space.
+
+
 
 **Q: **Describe the difference between static and dynamic.
 
-**A: **
+**A: **Static: the environment does not change between the agent's actions.
+Dynamic: the environment can change between the agent's actions.
 
 ### Blind search
 
@@ -52,26 +64,28 @@
 
 
 
+**Q: **Describe the general algorithm for graph search where the container type is unknown.
+
+**A: **
+
+- Let $I$ be a node holding the initial state of the problem
+- Add $I$ to the container
+- Loop
+  - If the queue is empty, return failure
+  - Remove a node from the container and call it $t$
+  - Mark $t$ as "explored"
+  - If $t$ holds the goal state, return success
+  - For each node $v$ that is a successor of $t$:
+    - If $v$ is not "explored" or in the container:
+      - Add $v$ to the container
+
+
+
 **Q:** What kind of container does Breadth First Search use? Is it FIFO or FILO? What does the abbreviation stand for?
 
 **A:** Queue, FIFO, first in first out.
 
 
-
-**Q:** Describe the steps for the BFS algorithm.
-
-**A:**
-
-* Let $I$ be a node holding the initial state of the problem
-* Push $I$ to the queue
-* Loop
-  * If the queue is empty, return failure
-  * Pop a node from the queue and call it $t$
-  * Mark $t$ as "explored"
-  * If $t$ holds the goal state, return success
-  * For each node $v$ that is a successor of $t$:
-    * If $v$ is not "explored" or in the queue:
-      * Insert $v$ into the queue
 
 **Q: **Describe the space and time complexity of BFS.
 
@@ -89,26 +103,11 @@
 
 
 
-**Q:** Describe the steps for the DFS algorithm.
-
-**A:** 
-
-* Let $I$ be a node holding the initial state of the problem
-* Put $I$ on the stack
-* Loop:
-  * If the queue is empty, return failure
-  * Pop a node off the stack and call it $t$
-  * Mark $t$ as "explored"
-  * If $t$ holds the goal state, return success
-  * For each node $v$ that is a successor of $t$
-    * If $v$ is not yet "explored" or in the stack:
-      * Put $v$ on the stack
-
-
-
 **Q: ** Describe the space and time complexity of DFS.
 
 **A: **
+
+
 
 **Q: ** Is DFS complete? Is it optimal?.
 
@@ -122,15 +121,11 @@
 
 
 
-**Q:** Describe the steps for the IDDFS algorithm.
-
-**A:** 
-
-
-
 **Q: ** Describe the space and time complexity of IDDFS.
 
 **A: **
+
+
 
 **Q: ** Is IDDFS complete? Is it optimal?.
 
@@ -138,26 +133,9 @@
 
 
 
-**Q:** What kind of container does depth first search use? How are nodes in the container removed?
+**Q:** What kind of container does UCS use? How are nodes in the container removed?
 
 **A:** Priority queue, nodes with a lower value (i.e. lesser numbers) are removed first.
-
-
-
-**Q:** Describe the steps for the UCS algorithm.
-
-**A:** 
-
-- Let $I$ be a node holding the initial state of the problem and a value of $0$
-- Add $I$ to the priority queue
-- Loop:
-  - If the priority queue is empty, return failure
-  - Remove a node from the priority queue and call it $t$
-  - Mark $t$ as "explored"
-  - If $t$ holds the goal state, return success
-  - For each node $v$ that is a successor of $t$
-    - If $v$ is not yet "explored" or in the priority queue:
-      - Add $v$ to the priority queue  
 
 
 
@@ -165,9 +143,13 @@
 
 **A: **
 
+
+
 **Q: ** Is UCS complete? Is it optimal?.
 
 **A: **
+
+
 
 ### Informed search
 
@@ -205,12 +187,6 @@ $$
 **Q: **What is the implication between admissibility and consistency of a heuristic?
 
 **A: **Consistency implies admissibility but the converse is not true.
-
-
-
-**Q: **
-
-**A:**
 
 
 
